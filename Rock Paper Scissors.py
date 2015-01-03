@@ -1,7 +1,7 @@
 try:
 	from Tkinter import * #Python 2 catch
 except ImportError:
-	from tkinter import *
+	from tkinter import * #Python 3 catch
 
 import random 
 
