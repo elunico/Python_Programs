@@ -1,4 +1,8 @@
-from Tkinter import *
+try:
+	from Tkinter import * #Python 2 catch
+except ImportError:
+	from tkinter import *
+
 import random 
 
 choices = ['rock', 'paper', 'scissors']
