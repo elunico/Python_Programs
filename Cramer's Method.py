@@ -1,4 +1,4 @@
-#Thomas Povinelli
+#Thomas 
 #Cramer's Method
 #December 18, 2014
 
