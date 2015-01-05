@@ -32,17 +32,22 @@ class Functions(object):
 		self.rk = 0
 		self.cscore = 0
 		self.pscore = 0
+		self.tscore = 0
 		self.score = Tk()
 		self.score.title("Score")
 		self.score.geometry("+500+100")
 		self.scoreC = Label(self.score, text=self.cscore)
 		self.scoreP = Label(self.score, text=self.pscore)
+		self.scoreT = Label(self.score, text=self.tscore)
 		self.scoreLC = Label(self.score, text="CPU Score:")
 		self.scoreLP = Label(self.score, text="Player Score:")
+		self.scoreLT = Label(self.score, text="Ties:")
 		self.scoreC.grid(row = 0, column =1)
 		self.scoreP.grid(row = 1, column=1)
 		self.scoreLC.grid(row=0, column=0)
 		self.scoreLP.grid(row=1, column=0)
+		self.scoreLT.grid(row = 2, column =0)
+		self.scoreT.grid(row=2, column=1)
 	def userScissors(self, jmove):
 		self.userMove = 'scissors'
 		self.cpuMove = random.choice(choices)
@@ -105,6 +110,10 @@ class Functions(object):
 		alert = Tk()
 		alert.title("Tie!")
 		alert.geometry("+100+100")
+		self.tscore += 1
+		self.scoreT = Label(self.score, text=self.tscore)
+		self.scoreT.grid(row=2, column=1)
+		self.score.update()
 		Label(alert, text="You tied. You both called {}".format(p), font=("Helvetica Neue", "18", "bold")).pack()
 		Button(alert, text="Close", command = lambda: quitWin(alert), font=("Helvetica Neue", "18", "bold")).pack()
 		alert.mainloop()
