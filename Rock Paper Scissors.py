@@ -1,14 +1,12 @@
+#!/usr/bin/python
 try:
 	from Tkinter import * #Python 2 catch
 except ImportError:
 	from tkinter import * #Python 3 catch
 
-import random 
+import random
 
 choices = ['rock', 'paper', 'scissors']
-def quitWin(w):
-	w.destroy()
-	w.quit()
 
 class Application(object):
 	def window(self):
@@ -87,7 +85,7 @@ class Application(object):
 		alert.title("you lost!")
 		alert.geometry("+100+100")
 		Label(alert, text="You lost! You called {} and the Computer called {}".format(p, c), font=("Helvetica Neue", "18", "bold")).pack()
-		Button(alert, text="Close", command = lambda: quitWin(alert), font=("Helvetica Neue", "18", "bold")).pack()
+		Button(alert, text="Close", command=alert.destroy, font=("Helvetica Neue", "18", "bold")).pack()
 		self.cscore += 1
 		self.scoreC = Label(self.score, text=self.cscore)
 		self.scoreC.grid(row = 0, column =1)
@@ -98,7 +96,7 @@ class Application(object):
 		alert.title("you win!")
 		alert.geometry("+100+100")
 		Label(alert, text="You WON! You called {} and the Computer called {}".format(p, c), font=("Helvetica Neue", "18", "bold")).pack()
-		Button(alert, text="Close", command = lambda: quitWin(alert), font=("Helvetica Neue", "18", "bold")).pack()
+		Button(alert, text="Close", command=alert.destroy, font=("Helvetica Neue", "18", "bold")).pack()
 		self.pscore += 1
 		self.scoreP = Label(self.score, text=self.pscore)
 		self.scoreP.grid(row = 1, column=1)
@@ -113,7 +111,7 @@ class Application(object):
 		self.scoreT.grid(row=2, column=1)
 		self.score.update()
 		Label(alert, text="You tied. You both called {}".format(p), font=("Helvetica Neue", "18", "bold")).pack()
-		Button(alert, text="Close", command = lambda: quitWin(alert), font=("Helvetica Neue", "18", "bold")).pack()
+		Button(alert, text="Close", command=alert.destroy, font=("Helvetica Neue", "18", "bold")).pack()
 		alert.mainloop()
 
 A = Application()
