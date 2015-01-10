@@ -5,7 +5,6 @@ except ImportError:
 	from tkinter import * #Python 3 catch
 
 import random
-
 choices = ['rock', 'paper', 'scissors']
 
 class Application(object):
@@ -44,6 +43,7 @@ class Application(object):
 		self.scoreLP.grid(row=1, column=0)
 		self.scoreLT.grid(row = 2, column =0)
 		self.scoreT.grid(row=2, column=1)
+		self.window()
 	def userScissors(self, jmove):
 		self.userMove = 'scissors'
 		self.cpuMove = random.choice(choices)
@@ -114,7 +114,11 @@ class Application(object):
 		Button(alert, text="Close", command=alert.destroy, font=("Helvetica Neue", "18", "bold")).pack()
 		alert.mainloop()
 
-A = Application()
-while 1:
-	A.window()
 
+def main():
+	A = Application()
+	while True:
+		A.window()
+
+if __name__ == '__main__':
+	main()
