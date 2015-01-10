@@ -5,7 +5,6 @@ except ImportError:
 	from tkinter import * #Python 3 catch
 
 import random
-choices = ['rock', 'paper', 'scissors']
 
 class Application(object):
 	def window(self):
@@ -22,6 +21,7 @@ class Application(object):
 		quiter.pack(pady=7, padx=7, side=LEFT)
 		self.move.mainloop()
 	def __init__(self):
+		self.choices = ['rock', 'paper', 'scissors']
 		self.sc = 0
 		self.pp = 0
 		self.rk = 0
@@ -46,7 +46,7 @@ class Application(object):
 		self.window()
 	def userScissors(self, jmove):
 		self.userMove = 'scissors'
-		self.cpuMove = random.choice(choices)
+		self.cpuMove = random.choice(self.choices)
 		if self.cpuMove == 'rock':
 			self.lose(self.userMove, 'rock')
 		elif self.cpuMove == 'scissors':
@@ -58,7 +58,7 @@ class Application(object):
 		jmove.quit()
 	def userPaper(self, jmove):
 		self.userMove = 'paper'
-		self.cpuMove = random.choice(choices)
+		self.cpuMove = random.choice(self.choices)
 		if self.cpuMove == 'rock':
 			self.win(self.userMove, 'rock')
 		elif self.cpuMove == 'scissors':
@@ -70,7 +70,7 @@ class Application(object):
 		jmove.quit()
 	def userRock(self, jmove):
 		self.userMove = 'rock'
-		self.cpuMove = random.choice(choices)
+		self.cpuMove = random.choice(self.choices)
 		if self.cpuMove == 'rock':
 			self.draw(self.userMove)
 		elif self.cpuMove == 'scissors':
@@ -113,7 +113,6 @@ class Application(object):
 		Label(alert, text="You tied. You both called {}".format(p), font=("Helvetica Neue", "18", "bold")).pack()
 		Button(alert, text="Close", command=alert.destroy, font=("Helvetica Neue", "18", "bold")).pack()
 		alert.mainloop()
-
 
 def main():
 	A = Application()
