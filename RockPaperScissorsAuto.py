@@ -9,14 +9,6 @@ import random
 class Application(object):
 	def window(self):
 		self.userScissors()
-		#self.move = Tk()
-		#self.move.title("Pick your move!")
-		#self.move.geometry("+100+100")
-		#scissors = Button(self.move, text="Go", font=("Helvetica Neue", "18", "bold"), command= lambda: self.userScissors(self.move))
-		#quiter = Button(self.move, text="quit", font=("Helvetica Neue", "18", "bold"), command=quit)
-		#scissors.pack(pady=7, padx=7, side=LEFT)
-		#quiter.pack(pady=7, padx=7, side=LEFT)
-		#self.move.mainloop()
 	def computerMove(self):
 		if self.result == 'draw':
 			if self.last == 'rock':
@@ -84,7 +76,7 @@ class Application(object):
 		self.scoreLT.grid(row = 2, column =0)
 		self.scoreT.grid(row=2, column=1)
 		self.window()
-	def userScissors(self): #, jmove):
+	def userScissors(self):
 		self.last = 'scissors'
 		self.userMove = self.computerMove()
 		self.cpuMove = self.computer2Move()
@@ -95,47 +87,27 @@ class Application(object):
 		elif self.cpuMove == 'paper':
 			self.win(self.userMove, 'paper')
 		self.sc += 1
-		#jmove.destroy()
-		#jmove.quit()
 	def lose(self, p, c):
 		self.result = 'draw'
 		self.result2 = 'win'
-		#alert = Tk()
-		#alert.title("you lost!")
-		#alert.geometry("+100+100")
-		#Label(alert, text="You lost! You called {} and the Computer called {}".format(p, c), font=("Helvetica Neue", "18", "bold")).pack()
-		#Button(alert, text="Close", command=alert.destroy, font=("Helvetica Neue", "18", "bold")).pack()
 		self.cscore += 1
 		self.scoreC = Label(self.score, text=self.cscore)
 		self.scoreC.grid(row = 0, column =1)
 		self.score.update()
-		#alert.mainloop()
 	def win(self, p, c):
 		self.result = 'lose'
 		self.result2 = 'win'
-		#alert = Tk()
-		#alert.title("you win!")
-		#alert.geometry("+100+100")
-		#Label(alert, text="You WON! You called {} and the Computer called {}".format(p, c), font=("Helvetica Neue", "18", "bold")).pack()
-		#Button(alert, text="Close", command=alert.destroy, font=("Helvetica Neue", "18", "bold")).pack()
 		self.pscore += 1
 		self.scoreP = Label(self.score, text=self.pscore)
 		self.scoreP.grid(row = 1, column=1)
 		self.score.update()
-		#alert.mainloop()
 	def draw(self, p):
 		self.result = 'win'
 		self.result2 = 'win'
-		#alert = Tk()
-		#alert.title("Tie!")
-		#alert.geometry("+100+100")
 		self.tscore += 1
 		self.scoreT = Label(self.score, text=self.tscore)
 		self.scoreT.grid(row=2, column=1)
 		self.score.update()
-		#Label(alert, text="You tied. You both called {}".format(p), font=("Helvetica Neue", "18", "bold")).pack()
-		#Button(alert, text="Close", command=alert.destroy, font=("Helvetica Neue", "18", "bold")).pack()
-		#alert.mainloop()
 
 def main():
 	A = Application()
