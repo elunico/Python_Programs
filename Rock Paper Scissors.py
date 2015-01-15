@@ -21,7 +21,7 @@ class Application(object):
 		quiter.pack(pady=7, padx=7, side=LEFT)
 		self.move.mainloop()
 	def computerMove(self):
-		if self.result == 'lose':
+		if self.result == 'draw':
 			if self.last == 'rock':
 				self.cpuMove = 'scissors'
 			elif self.last == 'paper':
@@ -30,7 +30,7 @@ class Application(object):
 				self.cpuMove = 'paper'
 		elif self.result == 'win':
 			self.cpuMove = random.choice(self.choices)
-		elif self.result == 'draw':
+		elif self.result == 'lose':
 			if self.last == 'rock':
 				self.cpuMove = 'scissors'
 			elif self.last == 'scissors':
