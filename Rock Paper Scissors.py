@@ -20,8 +20,30 @@ class Application(object):
 		paper.pack(pady=7, padx=7, side=LEFT)
 		quiter.pack(pady=7, padx=7, side=LEFT)
 		self.move.mainloop()
+	def computerMove(self):
+		if self.result == 'lose':
+			if self.last == 'rock':
+				self.cpuMove = 'scissors'
+			elif self.last == 'paper':
+				self.cpuMove = 'rock'
+			elif self.last == 'rock':
+				self.cpuMove = 'paper'
+		elif self.result == 'win':
+			self.cpuMove = random.choice(self.choices)
+		elif self.result == 'draw':
+			if self.last == 'rock':
+				self.cpuMove = 'scissors'
+			elif self.last == 'scissors':
+				self.cpuMove = 'paper'
+			elif self.last == 'paper':
+				self.cpuMove = 'rock'
+		else:
+			self.cpuMove = random.choice(self.choices)
+		return self.cpuMove
 	def __init__(self):
 		self.choices = ['rock', 'paper', 'scissors']
+		self.last = ''
+		self.result = ''
 		self.sc = 0
 		self.pp = 0
 		self.rk = 0
@@ -45,8 +67,9 @@ class Application(object):
 		self.scoreT.grid(row=2, column=1)
 		self.window()
 	def userScissors(self, jmove):
+		self.last = 'scissors'
 		self.userMove = 'scissors'
-		self.cpuMove = random.choice(self.choices)
+		self.cpuMove = self.computerMove()
 		if self.cpuMove == 'rock':
 			self.lose(self.userMove, 'rock')
 		elif self.cpuMove == 'scissors':
@@ -57,8 +80,9 @@ class Application(object):
 		jmove.destroy()
 		jmove.quit()
 	def userPaper(self, jmove):
+		self.last = 'paper'
 		self.userMove = 'paper'
-		self.cpuMove = random.choice(self.choices)
+		self.cpuMove = self.computerMove()
 		if self.cpuMove == 'rock':
 			self.win(self.userMove, 'rock')
 		elif self.cpuMove == 'scissors':
@@ -69,8 +93,9 @@ class Application(object):
 		jmove.destroy()
 		jmove.quit()
 	def userRock(self, jmove):
+		self.last = 'rock'
 		self.userMove = 'rock'
-		self.cpuMove = random.choice(self.choices)
+		self.cpuMove = self.computerMove()
 		if self.cpuMove == 'rock':
 			self.draw(self.userMove)
 		elif self.cpuMove == 'scissors':
@@ -81,6 +106,7 @@ class Application(object):
 		jmove.destroy()
 		jmove.quit()
 	def lose(self, p, c):
+		self.result = 'lose'
 		alert = Tk()
 		alert.title("you lost!")
 		alert.geometry("+100+100")
@@ -92,6 +118,7 @@ class Application(object):
 		self.score.update()
 		alert.mainloop()
 	def win(self, p, c):
+		self.result = 'win'
 		alert = Tk()
 		alert.title("you win!")
 		alert.geometry("+100+100")
@@ -103,6 +130,7 @@ class Application(object):
 		self.score.update()
 		alert.mainloop()
 	def draw(self, p):
+		self.result = 'draw'
 		alert = Tk()
 		alert.title("Tie!")
 		alert.geometry("+100+100")
