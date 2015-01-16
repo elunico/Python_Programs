@@ -21,8 +21,9 @@ def main():
 			sys.argv[1] = int(sys.argv[1])
 		except:
 			print("Sorry You have to pass an integer.")
-	x = str( fac(sys.argv[1] ) )
-	print( "\n" + x + "\n" )
+			raise SystemExit(2)
+	y = str( fac(sys.argv[1] ) )
+	print( "\n" + y + "\n" )
 
 if __name__ == '__main__':
     main()
