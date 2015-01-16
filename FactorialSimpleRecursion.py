@@ -13,12 +13,14 @@ def main():
 	if '.' in sys.argv[1]:
 		try:
 			raise ValueError
-		except ValueError as f:
+		except ValueError:
 			print("ValueError: Can only take the factorial of integers with this program\n")
-			print(f)
 			raise SystemExit(1)
 	else:
-		sys.argv[1] = int(sys.argv[1])
+		try:
+			sys.argv[1] = int(sys.argv[1])
+		except:
+			print("Sorry You have to pass an integer.")
 	x = str( fac(sys.argv[1] ) )
 	print( "\n" + x + "\n" )
 
