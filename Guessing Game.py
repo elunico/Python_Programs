@@ -53,12 +53,13 @@ class Application:
 				print("Yay, I win and in only {} turns".format(self.turns))
 			self.turns += 1
 			if self.turns == 20:
+				print("Sorry, I couldn't get it!\nYOU WIN!")
 				break
-				print("Sorry, I couldn't get it")
+
 
 def main():
 	a = Application()
 	a.main()
-	
+
 if __name__ == '__main__':
 	main()
