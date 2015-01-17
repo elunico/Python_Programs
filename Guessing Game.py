@@ -51,6 +51,7 @@ class Application:
 			elif self.answer == 'yes':
 				print("Gotcha!")
 				print("Yay, I win and in only {} turns".format(self.turns))
+				return 0
 			self.turns += 1
 			if self.turns == 20:
 				print("Sorry, I couldn't get it!\nYOU WIN!")
