@@ -7,7 +7,7 @@ class Application:
 		self.firstturn = True
 		self.turns = 0
 		self.exception = True
-
+		
 		self.lownumbers = [0]
 		self.highnumbers =[0]
 	def instructions(self):
