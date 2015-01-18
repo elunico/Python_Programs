@@ -36,11 +36,16 @@ class Application:
 	def main(self):
 		self.instructions()
 		while self.answer != 'yes' :
-			if self.firstturn:
-				self.guess = random.randint(self.lownumbers[-1], self.highnumbers[0])
-				self.firstturn = False
-			else:
-				self.guess = random.randint(self.lownumbers[-1]+1, self.highnumbers[0]-1)
+			try:
+				if self.firstturn:
+					self.guess = random.randint(self.lownumbers[-1], self.highnumbers[0])
+					self.firstturn = False
+				else:
+					self.guess = random.randint(self.lownumbers[-1]+1, self.highnumbers[0]-1)
+			except ValueError:
+				print("Hmmm.... that's odd, there are no integers greater than {0} and less than {1}"\
+				"\nPerhaps you have made a mistake.".format(self.lownumbers[-1], self.highnumbers[0]))
+				raise SystemExit(3)
 			self.answer = input( "\n\nIs {} your number? ".format(self.guess) )
 			if self.answer == 'h' :
 				self.lownumbers.append(self.guess)
