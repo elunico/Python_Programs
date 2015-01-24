@@ -31,15 +31,16 @@ def invalid(x):
         return False
     except:
         return True
+    return False
 
 def redo(y):
     while invalid(y):
         print("Sorry {0} is not a valid integer, please enter an integer".format(y))
-        y = raw_input("Num: ")
+        y = raw_input("Enter a valid Number: ")
     return y
 
 def main():
-    x = raw_input("Num: ")
+    x = raw_input("Enter a Number: ")
     if x in QUITWORDS:
         sys.exit()
     while invalid(x):
