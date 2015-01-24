@@ -15,7 +15,7 @@ def is_prime(n):
     if n == 2:
         return True
     if str(n)[-1] == '5':
-        return True
+        return False
     if n % 2 == 0 and n > 2: 
         return False
     for i in range(3, int(math.sqrt(n)) + 1, 2):
