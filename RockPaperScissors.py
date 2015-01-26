@@ -22,21 +22,21 @@ class Application(object):
 		self.move.mainloop()
 	def computerMove(self):
 		if self.result == 'draw':
-			if self.last == 'rock':
-				self.cpuMove = 'scissors'
-			elif self.last == 'paper':
-				self.cpuMove = 'rock'
-			elif self.last == 'rock':
-				self.cpuMove = 'paper'
-		elif self.result == 'win':
 			self.cpuMove = random.choice(self.choices)
-		elif self.result == 'lose':
+		elif self.result == 'win':
 			if self.last == 'rock':
+				self.cpuMove = 'paper'
+			elif self.last == 'paper':
 				self.cpuMove = 'scissors'
 			elif self.last == 'scissors':
-				self.cpuMove = 'paper'
-			elif self.last == 'paper':
 				self.cpuMove = 'rock'
+		elif self.result == 'lose':
+			if self.last == 'rock':
+				self.cpuMove = 'rock'
+			elif self.last == 'scissors':
+				self.cpuMove = 'scissors'
+			elif self.last == 'paper':
+				self.cpuMove = 'paper'
 		else:
 			self.cpuMove = random.choice(self.choices)
 		return self.cpuMove
