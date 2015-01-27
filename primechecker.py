@@ -14,9 +14,9 @@ def is_prime(n):
             return None
     if n == 2:
         return True
-    if str(n)[-1] == '5':
+    if str(n)[-1] == '5' and n != 5:
         return False
-    if n % 2 == 0 and n > 2: 
+    if n % 2 == 0 and n > 2:
         return False
     for i in range(3, int(math.sqrt(n)) + 1, 2):
         if n % i == 0:
