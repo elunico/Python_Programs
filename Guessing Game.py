@@ -7,7 +7,7 @@ class Application:
 		self.firstturn = True
 		self.turns = 0
 		self.exception = True
-		
+
 		self.lownumbers = [0]
 		self.highnumbers =[0]
 	def instructions(self):
@@ -36,6 +36,7 @@ class Application:
 	def main(self):
 		self.instructions()
 		while self.answer != 'yes' :
+			self.turns += 1
 			try:
 				if self.firstturn:
 					self.guess = random.randint(self.lownumbers[-1], self.highnumbers[0])
@@ -59,7 +60,6 @@ class Application:
 				print("Gotcha!")
 				print("Yay, I win and in only {} turns".format(self.turns))
 				return 0
-			self.turns += 1
 			if self.turns == 20:
 				print("Sorry, I couldn't get it!\nYOU WIN!")
 				break
