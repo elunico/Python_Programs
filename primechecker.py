@@ -37,6 +37,8 @@ def redo(y):
     while invalid(y):
         print("Sorry \"{0}\" is not a valid integer, please enter an integer".format(y))
         y = raw_input("Enter a valid Number: ")
+        if y in QUITWORDS:
+            sys.exit()
     return y
 
 def main():
