@@ -48,8 +48,8 @@ class Application:
 				"\nPerhaps you have made a mistake.".format(self.lownumbers[-1], self.highnumbers[0]))
 				raise SystemExit(3)
 			self.answer = input( "\n\nIs {} your number? ".format(self.guess) )
-			while self.answer == "":
-				self.answer = input( "\n\nIs {} your number? ".format(self.guess) )
+			while self.answer != "h" and self.answer != 'l' and self.answer != 'yes':
+				self.answer = input( "\n\nIs your number [h]igher or [l]ower than {0}; \nor is {0} your number [yes]? ".format(self.guess) )
 			if self.answer == 'h' :
 				self.lownumbers.append(self.guess)
 				self.lownumbers = sorted(self.lownumbers)
