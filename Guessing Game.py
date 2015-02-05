@@ -24,12 +24,12 @@ class Application:
 		self.getRange()
 	def getRange(self):
 		while self.exception:
-			self.liss = (input("\nEnter the low and high range of your number: ")).split()
 			try:
+				self.liss = (raw_input("\nEnter the low and high range of your number: ")).split()
 				self.e = [int(e) for e in self.liss]
 				self.exception = False
 			except:
-				print("Please use integers!")
+				print("Please enter the LOW and HIGH range of your number--use integers!")
 				self.exception = True
 		self.lownumbers[0] = self.e[0]
 		self.highnumbers[0] = self.e[1]
@@ -47,9 +47,9 @@ class Application:
 				print("Hmmm.... that's odd, there are no integers greater than {0} and less than {1}"\
 				"\nPerhaps you have made a mistake.".format(self.lownumbers[-1], self.highnumbers[0]))
 				raise SystemExit(3)
-			self.answer = input( "\n\nIs {} your number? ".format(self.guess) )
+			self.answer = raw_input( "\n\nIs {} your number? ".format(self.guess) )
 			while self.answer != "h" and self.answer != 'l' and self.answer != 'yes':
-				self.answer = input( "\n\nIs your number [h]igher or [l]ower than {0}; \nor is {0} your number [yes]? ".format(self.guess) )
+				self.answer = raw_input( "\n\nIs your number [h]igher or [l]ower than {0}; \nor is {0} your number [yes]? ".format(self.guess) )
 			if self.answer == 'h' :
 				self.lownumbers.append(self.guess)
 				self.lownumbers = sorted(self.lownumbers)
@@ -57,8 +57,8 @@ class Application:
 				self.highnumbers.append(self.guess)
 				self.highnumbers = sorted(self.highnumbers)
 			elif self.answer == 'yes':
-				print("Gotcha!")
-				print("Yay, I win and in only {} turns".format(self.turns))
+				print("Got it")
+				print("I win and in only {} turns".format(self.turns))
 				return 0
 			if self.turns == 20:
 				print("Sorry, I couldn't get it!\nYOU WIN!")
