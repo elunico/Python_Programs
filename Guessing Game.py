@@ -11,14 +11,14 @@ class Application:
 		self.lownumbers = [0]
 		self.highnumbers =[0]
 	def instructions(self):
-		print("\nI\'m going to guess your number\n"\
-		"start by entering the low end and high end of your number\n"\
-		"separated by a space in the next prompt\n\n"\
+		print("\nI\'m going to guess your number\n"
+		"start by entering the low end and high end of your number\n"
+		"separated by a space in the next prompt\n\n"
 
-		"As you respond to my guesses,\n"\
-		"\ttype an [l] if your number is lower than my guess\n"\
-		"\ttype an [h] if your number is higher\n"\
-		"\ttype [yes] if I guessed correctly\n\n"\
+		"As you respond to my guesses,\n"
+		"\ttype an [l] if your number is lower than my guess\n"
+		"\ttype an [h] if your number is higher\n"
+		"\ttype [yes] if I guessed correctly\n\n"
 
 		"I WILL NOT GUESS THE ENDPOINTS YOU ENTER BELOW!")
 		self.getRange()
