@@ -60,7 +60,7 @@ class Application:
 				print("Got it")
 				print("I win and in only {} turns".format(self.turns))
 				return 0
-			if self.turns == 20:
+			if self.turns == 25:
 				print("Sorry, I couldn't get it!\nYOU WIN!")
 				break
 
