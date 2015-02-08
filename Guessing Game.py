@@ -24,8 +24,8 @@ class Application:
 	def getRange(self):
 		while self.exception:
 			try:
-				self.liss = (raw_input("\nEnter the low and high range of your number: ")).split()
-				self.e = [int(e) for e in self.liss]
+				self.liss = (raw_input("\nEnter the low and high range of your number: ")).split() # ['1', '1000']
+				self.e = [int(e) for e in self.liss] # '1' '1000' -> 1 1000 self.e = [1, 1000]
 				self.exception = False
 			except:
 				print("Please enter the LOW and HIGH range of your number--use integers!")
