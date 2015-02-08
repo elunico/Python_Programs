@@ -2,7 +2,6 @@ import random
 
 class Application:
 	def __init__(self):
-		self.h = 'h'; self.l = 'l'; self.yes = 'yes'
 		self.answer = 'no'
 		self.firstturn = True
 		self.turns = 0
