@@ -44,7 +44,7 @@ class Application:
 				else:
 					self.guess = random.randint(self.lownumbers[-1]+1, self.highnumbers[0]-1)
 			except ValueError:
-				print("Hmmm.... that's odd, there are no integers greater than {0} and less than {1}"\
+				print("Hmmm.... that's odd, there are no integers greater than {0} and less than {1}"
 				"\nPerhaps you have made a mistake.".format(self.lownumbers[-1], self.highnumbers[0]))
 				raise SystemExit(3)
 			self.answer = raw_input( "\n\nIs {} your number? ".format(self.guess) )
