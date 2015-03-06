@@ -45,8 +45,7 @@ def main():
     x = raw_input("Enter a Number: ")
     if x in QUITWORDS:
         sys.exit()
-    while invalid(x):
-        x = redo(x)
+    x = redo(x)
     x = int(x)
     print(is_prime(x))
 
