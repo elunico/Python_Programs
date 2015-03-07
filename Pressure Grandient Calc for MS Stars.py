@@ -80,14 +80,18 @@ class Application(object):
         row = 0
         col = 0
         for i in pressures:
-            Label(answer, text=i, font=("Courier New", "15", "bold")).grid(row=row, column=col, padx=5, pady=5)
+            Label(answer, text=i, font=("Courier New", "14", "normal")).grid(row=row, column=col, padx=5, pady=5)
             row += 1
             if row == 18:
                 col += 1
                 row = 0
-        Label(answer, text="Total:", font=("Courier New", "15", "bold")).grid(row=row+1, column=col)
-        Label(answer, text=total, font=("Courier New", "15", "bold")).grid(row=row+1, column=col+1)
-        Button(answer, text="Close", command=answer.destroy).grid(row=row+2, column=col+1)
+        Label(answer, text="Total:", font=("Courier New", "14", "bold")).grid(row=row, column=col)
+        row += 1
+        Label(answer, text=total, font=("Courier New", "14", "bold")).grid(row=row, column=col)
+        if row == 18:
+            col += 1
+            row = 0
+        Button(answer, text="Close", command=answer.destroy).grid(row=row+1, column=col)
         answer.mainloop()
 
 
