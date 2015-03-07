@@ -1,5 +1,12 @@
 from __future__ import division
-from Tkinter import *
+try:
+    from Tkinter import *
+except ImportError: # Python 3 Catch
+    try:
+        from tkinter import *
+    except ImportError:
+        print("Sorry, you need Tkinter for this program to function")
+        raise SystemExit
 
 def heq(limit = 45, radius = 23193333, density=4.5, step=45000000):
     basemass = 10
@@ -16,6 +23,8 @@ def heq(limit = 45, radius = 23193333, density=4.5, step=45000000):
 
 class Application(object):
     def __init__(self):
+        pass
+    def main(self):
         self.root = Tk()
         self.root.title("Pressure Gradient Calculator")
         self.root.geometry("+100+30")
@@ -40,25 +49,32 @@ class Application(object):
         self.root.mainloop()
     def calc(self):
         answer = Tk()
+        answer.title("Results")
+        answer.geometry("+60+20")
         l = self.e1.get()
         r = self.e2.get()
         d = self.e3.get()
         s = self.e4.get()
         try:
             l = float(l)
+        except:
+            l = 45
+        try:
             r = float(r)
+        except:
+            r = 23193333
+        try:
             d = float(d)
+        except:
+            d = 4.5
+        try:
             s = float(s)
         except:
-            if l == "":
-                l = 45
-            if r == "":
-                r = 23193333
-            if d == "":
-                d = 4.5
-            if s == "":
-                s = 45000000
-
+            s = 45000000
+        if r == 0:
+            Label(answer, text="Cannot have 0 radius!").pack()
+            Label(answer, text="Division by Zero Error").pack()
+            return "Error"
         total, pressures = heq(l, r)
 
         row = 0
@@ -79,6 +95,9 @@ class Application(object):
 
 def main():
     h = Application()
+    result = h.main()
+    while result == "Error":
+        h.main()
 
 
 
