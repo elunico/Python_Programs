@@ -75,7 +75,7 @@ class Application(object):
             Label(answer, text="Cannot have 0 radius!").pack()
             Label(answer, text="Division by Zero Error").pack()
             return "Error"
-        total, pressures = heq(l, r)
+        total, pressures = heq(l, r, d, s)
 
         row = 0
         col = 0
