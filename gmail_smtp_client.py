@@ -1,4 +1,3 @@
-from __future__ import print_function
 from Tkinter import *
 import smtplib
 import getpass
@@ -7,9 +6,9 @@ import getpass
 
 # A36
 # Any code that is commented out
-# or is written in with the line comment 
+# or is written in with the line comment
 # '#A36' is code that is related to this error
-# I could not get the servers for clients 
+# I could not get the servers for clients
 # besides Gmail to respond to TLS requests
 # or stop refusing login
 # Therefore this code was modified to prevent the user
@@ -74,19 +73,22 @@ class Application(object):
         finally:
             try:
                 server.quit()
-            except Exception as E:
-                print(E)
+            except UnboundLocalError:
+                pass
+            except:
+                alertText.insert(END, "\n\nERROR: Could not close server")
+                raise SystemExit(-1)
             alertText.insert(END, "\n\nClosing server...")
             alert.update()
             alertText.insert(END, "\nServer Closed.")
             alert.update()
             Button(alert, text='close', command=alert.destroy).pack()
             alert.mainloop()
-            raise SystemExit(-1)
-    
+            raise SystemExit(0)
+
     def getStuff(self):
         return '''self.theClient code:#A36''', self.to_a, self.usn, self.unpw, self.sujeto, self.mes
-    
+
     def send(self):
         # self.theClient = self.client.get() code: #A36
         self.to_a = self.e1.get()
@@ -95,19 +97,19 @@ class Application(object):
         self.sujeto = self.e4.get()
         self.mes = self.e5.get('1.0', END)
         self.root.destroy()
-    
+
     def __init__(self):
         self.root = Tk()
         self.root.title("Compose Email")
-        
+
         # code #A36
         # l0 = Label(self.root, text="Select A Client")
         #         self.client = StringVar(self.root)
         #         self.client.set("gmail") # initial value
-        # 
+        #
         #         option = OptionMenu(self.root, self.client, "Gmail", "Yahoo", "Hotmail", "Aol")
         #         option.pack()
-        
+
         l1 = Label(self.root, text="Enter the recepient:", font=("Helvetica Neue", "14", "normal"))
         l2 = Label(self.root, text="Enter your email address:", font=("Helvetica Neue", "14", "normal"))
         l3 = Label(self.root, text="Enter your password: ", font=("Helvetica Neue", "14", "normal"))
@@ -131,14 +133,14 @@ class Application(object):
         self.e5.pack()
         sendb.pack()
         self.root.mainloop()
-    
+
 
 def main():
     a = Application()
     Client, recp, un, pw, sject, msg = a.getStuff()
     sub = sject + " \n"
     a.doSend(Client, recp, un, pw, sub, msg)
-    
+
 
 if __name__ == '__main__':
     main()
