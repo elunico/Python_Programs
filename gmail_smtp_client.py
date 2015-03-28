@@ -19,10 +19,9 @@ import getpass
 # and comment out whatever is uncommented with the tag #A36
 
 class Application(object):
-    SMTP_SERVERS = {"Gmail":'smtp.gmail.com', "Hotmail":'smtp.live.com', "Yahoo":'smtp.mail.yahoo.com', "Aol":'smtp.aol.com'}
-    PORTS = {'Gmail':587, 'Hotmail':25, 'Hotmail2':465, 'Yahoo':465, 'Yahoo2':587, 'Aol':587}
+    SMTP_SERVERS = {"Gmail":'smtp.gmail.com'}#, "Hotmail":'smtp.live.com', "Yahoo":'smtp.mail.yahoo.com', "Aol":'smtp.aol.com'}
+    PORTS = {'Gmail':587}#, 'Hotmail':25, 'Hotmail2':465, 'Yahoo':465, 'Yahoo2':587, 'Aol':587}
     def doSend(self, c, t, u, p, s, m):
-        c = "Gmail" # Code #A36
         alert = Tk()
         alert.title("Progress")
         alertText = Text(alert, font=("Courier", "13", "normal"))
@@ -87,10 +86,10 @@ class Application(object):
             raise SystemExit(0)
 
     def getStuff(self):
-        return '''self.theClient code:#A36''', self.to_a, self.usn, self.unpw, self.sujeto, self.mes
+        return self.theClient, self.to_a, self.usn, self.unpw, self.sujeto, self.mes
 
     def send(self):
-        # self.theClient = self.client.get() code: #A36
+        self.theClient = self.client.get()
         self.to_a = self.e1.get()
         self.usn = self.e2.get()
         self.unpw = self.e3.get()
@@ -102,13 +101,13 @@ class Application(object):
         self.root = Tk()
         self.root.title("Compose Email")
 
-        # code #A36
-        # l0 = Label(self.root, text="Select A Client")
-        #         self.client = StringVar(self.root)
-        #         self.client.set("gmail") # initial value
-        #
-        #         option = OptionMenu(self.root, self.client, "Gmail", "Yahoo", "Hotmail", "Aol")
-        #         option.pack()
+        l0 = Label(self.root, text="Select A Client")
+        l0.pack()
+        self.client = StringVar(self.root)
+        self.client.set("Gmail") # initial value
+
+        option = OptionMenu(self.root, self.client, "Gmail")#, "Yahoo", "Hotmail", "Aol")
+        option.pack()
 
         l1 = Label(self.root, text="Enter the recepient:", font=("Helvetica Neue", "14", "normal"))
         l2 = Label(self.root, text="Enter your email address:", font=("Helvetica Neue", "14", "normal"))
@@ -120,7 +119,7 @@ class Application(object):
         self.e2 = Entry(self.root, width=60, font=("Helvetica Neue", "14", "normal"))
         self.e3 = Entry(self.root, show="*", width=60, font=("Helvetica Neue", "14", "normal"))
         self.e4 = Entry(self.root, width=60, font=("Helvetica Neue", "14", "normal"))
-        self.e5 = Text(self.root, font=("Helvetica Neue", "14", "normal"))
+        self.e5 = Text(self.root, font=("Helvetica Neue", "14", "normal"), height=12, width=60)
         l1.pack()
         self.e1.pack()
         l2.pack()
