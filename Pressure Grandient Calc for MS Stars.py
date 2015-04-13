@@ -14,7 +14,17 @@ def heq(limit = 45, radius = 23193333, density=4.5, step=45000000):
     total = 0
     pressures = []
     while exponent <= limit:
-        pressure = (((6.6738 * (10 ** -11)) * (basemass ** exponent)) / ((radius ** 2))) * density
+        try:
+            pressure = (((6.6738 * (10 ** -11)) * (basemass ** exponent)) / ((radius ** 2))) * density
+        except OverflowError:
+            error = Tk()
+            error.title("Error")
+            error.geometry("+60+20")
+            Label(error, text="Overflow Error").pack()
+            Label(error, text="Please Check your Numbers").pack()
+            Button(error, text="close", command=error.destroy).pack()
+            error.mainloop()
+            return None, None
         pressures.append(pressure)
         total += pressure
         exponent += 1
@@ -48,9 +58,7 @@ class Application(object):
         self.b1.grid(row=4, column=1, padx=5, pady=5)
         self.root.mainloop()
     def calc(self):
-        answer = Tk()
-        answer.title("Results")
-        answer.geometry("+60+20")
+
         l = self.e1.get()
         r = self.e2.get()
         d = self.e3.get()
@@ -72,11 +80,23 @@ class Application(object):
         except:
             s = 45000000
         if r == 0:
+            answer = Tk()
+            answer.title("Results")
+            answer.geometry("+60+20")
             Label(answer, text="Cannot have 0 radius!").pack()
             Label(answer, text="Division by Zero Error").pack()
             return "Error"
-        total, pressures = heq(l, r, d, s)
 
+        total, pressures = heq(l, r, d, s)
+        if total == None and pressures == None:
+            return -1
+        try:
+            if answer:
+                pass
+        except:
+            answer = Tk()
+            answer.title("Results")
+            answer.geometry("+60+20")
         row = 0
         col = 0
         for i in pressures:
@@ -94,16 +114,11 @@ class Application(object):
         Button(answer, text="Close", command=answer.destroy).grid(row=row+1, column=col)
         answer.mainloop()
 
-
-
-
 def main():
     h = Application()
     result = h.main()
     while result == "Error":
         h.main()
-
-
 
 if __name__ == '__main__':
     main()
