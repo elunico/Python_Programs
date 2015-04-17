@@ -149,6 +149,8 @@ class Application(object):
 		Label(alert, text="You tied. You both called {}".format(p), font=("Helvetica Neue", "18", "bold")).pack()
 		Button(alert, text="Close", command=alert.destroy, font=("Helvetica Neue", "18", "bold")).pack()
 		alert.mainloop()
+	
+
 
 def main():
 	A = Application()
