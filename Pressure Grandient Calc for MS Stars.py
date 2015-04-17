@@ -24,7 +24,7 @@ def heq(limit = 45, radius = 23193333, density=4.5, step=45000000):
             Label(error, text="Please Check your Numbers").pack()
             Button(error, text="close", command=error.destroy).pack()
             error.mainloop()
-            return None, None
+            return None, None # Return none and none instead of negatives because I'm not a physicist and I don't know if 1 and 0 may be valid answers
         pressures.append(pressure)
         total += pressure
         exponent += 1

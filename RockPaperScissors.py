@@ -20,6 +20,7 @@ class Application(object):
 		paper.pack(pady=7, padx=7, side=LEFT)
 		quiter.pack(pady=7, padx=7, side=LEFT)
 		self.move.mainloop()
+	
 	def computerMove(self):
 		if self.result == 'draw':
 			self.cpuMove = random.choice(self.choices)
@@ -40,6 +41,7 @@ class Application(object):
 		else:
 			self.cpuMove = random.choice(self.choices)
 		return self.cpuMove
+	
 	def __init__(self):
 		self.choices = ['rock', 'paper', 'scissors']
 		self.last = ''
@@ -66,6 +68,7 @@ class Application(object):
 		self.scoreLT.grid(row = 2, column =0)
 		self.scoreT.grid(row=2, column=1)
 		self.window()
+	
 	def userScissors(self, jmove):
 		self.last = 'scissors'
 		self.userMove = 'scissors'
@@ -79,6 +82,7 @@ class Application(object):
 		self.sc += 1
 		jmove.destroy()
 		jmove.quit()
+	
 	def userPaper(self, jmove):
 		self.last = 'paper'
 		self.userMove = 'paper'
@@ -92,6 +96,7 @@ class Application(object):
 		self.pp += 1
 		jmove.destroy()
 		jmove.quit()
+	
 	def userRock(self, jmove):
 		self.last = 'rock'
 		self.userMove = 'rock'
@@ -105,6 +110,7 @@ class Application(object):
 		self.rk += 1
 		jmove.destroy()
 		jmove.quit()
+	
 	def lose(self, p, c):
 		self.result = 'lose'
 		alert = Tk()
@@ -117,6 +123,7 @@ class Application(object):
 		self.scoreC.grid(row = 0, column =1)
 		self.score.update()
 		alert.mainloop()
+	
 	def win(self, p, c):
 		self.result = 'win'
 		alert = Tk()
@@ -129,6 +136,7 @@ class Application(object):
 		self.scoreP.grid(row = 1, column=1)
 		self.score.update()
 		alert.mainloop()
+	
 	def draw(self, p):
 		self.result = 'draw'
 		alert = Tk()
