@@ -1,3 +1,4 @@
+# Ported from Ruby
 import math
 
 class NUMCHK(object):
