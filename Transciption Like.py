@@ -18,7 +18,7 @@ import random
 
 DNA = "5acgtcgactgcaaatgatttattcgacaacgcgcatcatcga3"\
       "3tgcagctgacgtttactaaataagctgttggaagtagtagct5"
-STOPS = ["aat", 'aag', 'aac']
+STOPS = ["aat", 'aag', 'aac'] # These are not the actual stop codons, they are only used as examples
 COMPL = {'a':'u', 't':'a', 'c':'g', "g":'c'}
 
 
