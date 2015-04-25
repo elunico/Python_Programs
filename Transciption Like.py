@@ -13,17 +13,19 @@
 
 # Please don't think I made this with efficiency in
 # mind
+from __future__ import print_function
+import random
 
-
-DNA = "5acgtcgactgcaaatgatttattcgacaacgcgcatcatcga33tgcagctgacgtttactaaataagctgttgcgcgtagtagct5"
+DNA = "5acgtcgactgcaaatgatttattcgacaacgcgcatcatcga3"\
+      "3tgcagctgacgtttactaaataagctgttggaagtagtagct5"
 STOPS = ["aat", 'aag', 'aac']
 COMPL = {'a':'u', 't':'a', 'c':'g', "g":'c'}
 
 
 def helicase(dna):
     split = DNA.split('33')
-    #split[1] = [split[1][i] for i in range(len(split[1]) -1, -1, -1)]
-    #split[1] = "".join(split[1])
+    split[1] = [split[1][i] for i in range(len(split[1]) -1, -1, -1)]
+    split[1] = "".join(split[1])
     split[0] = split[0].strip('5')
     split[1] = split[1].strip('5')
     return split
@@ -47,20 +49,20 @@ def find(ch,string1):
     return pos
 
 def getCode(i, g, s):
-    leninuse = len(g)
+    leninuse = len(i) - 1
     indexes = find(s, i)
     code = ""
     j = -1
     while g not in code:
         j += 1
-        code = g[indexes[j]:leninuse]
-    return [indexes[j], leninuse]
+        code = i[indexes[j]:leninuse-1]
+    return [indexes[j], leninuse-1]
 
 def findStop(sec, c):
     for i in STOPS:
         if i in c:
             j = c.index(i)
-            return (j * 3)
+            return j * 3 + 3
 
 def polymerase(template, position, cods):
     mRNA = ''
@@ -74,11 +76,21 @@ def polymerase(template, position, cods):
 def transcribe(dna, gene):
     strands = helicase(DNA)
     codons = []
+    genecodons = []
     for i in strands:
         for j in range(0, len(i) - 1, 3):
             codons.append("{0}{1}{2}".format(i[j], i[j+1], i[j+2]))
 
+    for thing in range(0, len(gene) - 1, 3):
+        genecodons.append("{0}{1}{2}".format(gene[thing], gene[thing+1], gene[thing+2]))
+
     inuse, strandnum = findGene(strands, gene)
+    if strandnum == 0:
+        strands[1] = [strands[1][i] for i in range(len(strands[1]) -1, -1, -1)]
+        strands[1] = "".join(strands[1])
+    elif strandnum == 1:
+        strands[0] = [strands[0][i] for i in range(len(strands[0]) -1, -1, -1)]
+        strands[0] = "".join(strands[0])
     if inuse == -1:
         return -1
 
@@ -86,16 +98,18 @@ def transcribe(dna, gene):
 
     position = getCode(inuse, gene, start)
 
-    mRNA = polymerase(strands[abs(strandnum-1)], position, codons)
+    mRNA = polymerase(strands[abs(strandnum-1)], position, genecodons)
 
     return mRNA
 
 
 def main():
-    gene = 'acgtcgactgcaaat'
-    mRNA = transcribe(DNA, gene)
-    print gene, mRNA
-    print gene[:-3].replace('t', 'u') == mRNA
+    gene = ['acgtcgactgcaaat', "ttattcgacaac", 'tcgatgatgaag']
+    ind = random.randrange(0, len(gene))
+    mRNA = transcribe(DNA, gene[ind])
+    print ("DNA:", DNA, '\n\n' + "Gene:", gene[ind], "\nmRNA:", mRNA, end=' ')
+    print ("\nEquivalent:", gene[ind].replace('t', 'u') == mRNA)
+    print ('\n' + "Note that the final 3 bases in sequence are a stop codon which is omitted from the mRNA")
 
 
 if __name__ == '__main__':
