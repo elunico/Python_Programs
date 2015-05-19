@@ -3,7 +3,7 @@
 # May 18-19, 2015
 # 105 minutes
 # 2 languages - 1 living; 1 dead
-# 32000 successful tests in less than 4 seconds
+# 64000 successful tests in less than 7 seconds
 
 '''
 I wrote this for a game. It involved a long and complex
@@ -13,24 +13,57 @@ tested by dice rolling and keeping track.
 I digitized the dice rolling and looping flow chart
 using recursion and random numbers so rather than
 follow an ungodly sum of dice rolls and a tiny flow chart
-one simply has to run this program to decide if they 
+one simply has to run this program to decide if they
 strike ore or not or if they die and they lose.
 
 Unless of course you like rolling dice, in which case
-I encourage you to endulge your passions.  
+I encourage you to endulge your passions.
 '''
-
+from __future__ import print_function
 import random
+import time
+import sys
+
+# Global count weeks
+# each call to a function is a week of time in the game
+global WEEKS
+WEEKS = 0
+
+class bcolors:
+    '''Constants used to change terminal color'''
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
+def printf(string):
+    '''Optionally delayed printing for dramatic effect'''
+    print(string)
+    if '-s' in sys.argv:
+        time.sleep(2)
 
 def roll() :
+    '''Two six sided dice are rolled'''
     r = random.randint(2, 13)
     return r;
 
 class person_t(object):
+    '''Person object that keeps track of special traits'''
     def __init__(self):
-        self.admin = 3; self.bribery = 5; self.leader = 2; self.carousing = 0; self.eng = 0; self.ship_boat = 3; self.prosp = 0; self.vacc_suit = 4; self.nav = 0;
+        self.admin = 1; self.bribery = 1; self.leader = 1; self.carousing = 1; self.eng = 1; self.ship_boat = 1; self.prosp = 1; self.vacc_suit = 1; self.nav = 1;
 
+    
+
+# Begin Flow Chart
+    
 def prospect1(p):
+    global WEEKS 
+    WEEKS += 1 
+    printf(">> Prospecting...")
     a = roll() + p.prosp + p.eng + p.vacc_suit
     if a <= 5:
         result = moveToTrojan(p)
@@ -38,9 +71,12 @@ def prospect1(p):
         result = prospect2(p)
     else:
         result = restAndRec(p)
-    return result 
-    
+    return result
+
 def prospect2(p):
+    global WEEKS 
+    WEEKS += 1 
+    printf(">> Prospecting...")
     a = roll() + p.prosp + p.eng + p.vacc_suit
     if a <= 8:
         result = prospect1(p)
@@ -51,6 +87,9 @@ def prospect2(p):
     return result
 
 def moveToTrojan(p):
+    global WEEKS 
+    WEEKS += 1 
+    printf(">> Prospecting...")
     a = roll()
     if a <= 4:
         result = needRefuel(p)
@@ -63,6 +102,9 @@ def moveToTrojan(p):
     return result
 
 def moveToRRA(p):
+    global WEEKS 
+    WEEKS += 1 
+    printf(">> Move to rumored area...")
     a = roll()
     if a <= 6:
         result = moveToCurrentProducingArea(p)
@@ -75,6 +117,9 @@ def moveToRRA(p):
     return result
 
 def restAndRec(p):
+    global WEEKS 
+    WEEKS += 1 
+    printf(">> Move to Rest and Recreation...")
     a = roll()
     if a < 5:
         result = moveToRRA(p)
@@ -83,9 +128,11 @@ def restAndRec(p):
     else:
         result = prospect2(p)
     return result
-    
 
 def moveToCurrentProducingArea(p):
+    global WEEKS 
+    WEEKS += 1 
+    printf(">> Move to current producing area...")
     a = roll()
     if a >= 8:
         result = moveToRRA(p)
@@ -95,8 +142,10 @@ def moveToCurrentProducingArea(p):
         result = selectAreaOfProspect(p)
     return result
 
-
 def moveToBeltFringe(p):
+    global WEEKS 
+    WEEKS += 1 
+    printf(">> Move to belt fringe...")
     a = roll()
     if a <= 4:
         result = refuel(p)
@@ -108,6 +157,9 @@ def moveToBeltFringe(p):
         result = prospect2(p)
 
 def danger(p):
+    global WEEKS 
+    WEEKS += 1 
+    printf(bcolors.FAIL + ">> Danger!" + bcolors.ENDC)
     a = roll()
     if a >= 6 and a <= 9:
         result = 2
@@ -118,22 +170,31 @@ def danger(p):
     return result
 
 def refuel(p):
+    global WEEKS 
+    WEEKS += 1 
+    printf(">> Refuel...")
     a = roll() + p.eng + p.ship_boat
     if a >= 8:
         result = moveToBeltFringe(p)
     else:
         result = danger(p)
     return result
-    
+
 def needRefuel(p):
+    global WEEKS 
+    WEEKS += 1 
+    printf(">> Need Refuel...")
     a = roll()
     if a <= 10:
         result = refuel(p)
     else:
         result = 2
     return result
-    
+
 def patronAssists(p):
+    global WEEKS 
+    WEEKS += 1 
+    printf(bcolors.OKGREEN + ">> Patron assists..." + bcolors.ENDC)
     a = roll() + p.leader
     if a >= 10:
         result = makeSpecialApplication(p)
@@ -142,6 +203,9 @@ def patronAssists(p):
     return result
 
 def selectAreaOfProspect(p) :
+    global WEEKS 
+    WEEKS += 1 
+    printf(">> Selecting Area of Prospect...")
     attempt = roll() + p.eng + p.nav;
     if (attempt <= 4) :
         result = moveToTrojan(p)
@@ -152,6 +216,9 @@ def selectAreaOfProspect(p) :
     return result;
 
 def goNoLicense(p) :
+    global WEEKS 
+    WEEKS += 1 
+    printf(">> Go mine without license...")
     attempt = roll();
     if (attempt <= 5) :
         result = seekPatron(p);
@@ -160,6 +227,9 @@ def goNoLicense(p) :
     return result;
 
 def seekPatron (p) :
+    global WEEKS 
+    WEEKS += 1 
+    printf(">> Seek patron...")
     attempt = roll();
     if (attempt <= 4) :
         result = applicationDenied(p);
@@ -170,16 +240,22 @@ def seekPatron (p) :
     return result;
 
 def makeSpecialApplication(p) :
-    attempt = roll(); 
+    global WEEKS 
+    WEEKS += 1 
+    printf(">> Make Special Application...")
+    attempt = roll();
     if (attempt>= 9 ) :
-        print("License Granted!")
+        printf(bcolors.OKGREEN + ">> License Granted!" + bcolors.ENDC)
         result = selectAreaOfProspect(p);
     else :
         result = applicationDenied(p);
     return result;
 
 def considerBribe(p) :
-    attempt = roll(); 
+    global WEEKS 
+    WEEKS += 1 
+    printf(">> Consider Bribery...")
+    attempt = roll();
     if (attempt >= 8) :
         result = offerBribe(p);
     elif (attempt >=6 and attempt <=7) :
@@ -189,18 +265,24 @@ def considerBribe(p) :
     return result;
 
 def offerBribe(p) :
-    attempt = roll(); 
+    global WEEKS 
+    WEEKS += 1 
+    printf(">> Offer bribery...")
+    attempt = roll();
     if (attempt <= 5) :
         result = considerBribe(p);
     elif (attempt >= 6 and attempt <= 9) :
         result = apply(p);
     else :
-        print("License Granted!")
+        printf(bcolors.OKGREEN + ">> License Granted!" + bcolors.ENDC)
         result = selectAreaOfProspect(p);
     return result;
 
 def apply(p) :
-    apply = roll(); 
+    global WEEKS 
+    WEEKS += 1 
+    printf(bcolors.OKGREEN + ">> Begin Application..." + bcolors.ENDC)
+    apply = roll();
     if (apply <= 7) :
         result = applicationDenied(p);
     else :
@@ -208,6 +290,9 @@ def apply(p) :
     return result;
 
 def applicationDenied(p) :
+    global WEEKS 
+    WEEKS += 1 
+    printf(">> Application Denied...")
     attempt = roll();
     if (attempt <= 3) :
         result = apply(p);
@@ -222,18 +307,30 @@ def applicationDenied(p) :
     return result;
 
 def main () :
+    global WEEKS 
     p = person_t();
-    print("You apply for a license")
+    printf(bcolors.OKBLUE + "You apply for a license" + bcolors.ENDC)
     result = apply(p);
     if (result == 1) :
-        print("Belting")
+        printf("Belting")
+        printf(bcolors.OKBLUE + "Total weeks: " + str(WEEKS) + bcolors.ENDC)
+        return result
     elif result == 2:
-        print("Dead")
+        printf(bcolors.FAIL + "Dead"+ bcolors.ENDC)
+        printf(bcolors.OKBLUE + "Total weeks: " + str(WEEKS) + bcolors.ENDC)
+        return result
     elif result == 3:
-        print("Strike")
-    if result != 3 and result != 1:
-        print("End")
+        printf(bcolors.OKGREEN + "Strike" + bcolors.ENDC)
+        printf(bcolors.OKBLUE + "Total weeks: " + str(WEEKS) + bcolors.ENDC)
+        return result
+    printf("End")
+    printf(bcolors.OKBLUE + "Total weeks: " + str(WEEKS) + bcolors.ENDC)
     return 0;
 
+def usage():
+    if len(sys.argv) > 2 or ('-s' not in sys.argv and len(sys.argv) > 1):
+        raise SystemExit("Usage: $ python \"dice rolls.py\" [-s]\n-s : proceed slowly\n")
+
 if __name__ == '__main__':
+    usage()
     main()
