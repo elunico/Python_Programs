@@ -19,6 +19,7 @@ strike ore or not or if they die and they lose.
 Unless of course you like rolling dice, in which case
 I encourage you to endulge your passions.
 '''
+
 from __future__ import print_function
 import random
 import time
@@ -51,13 +52,13 @@ def roll() :
     r = random.randint(2, 13)
     return r;
 
+# Keeps track of player's traits during the proceedings of the chart
 class person_t(object):
     '''Person object that keeps track of special traits'''
     def __init__(self):
         self.admin = 1; self.bribery = 1; self.leader = 1; self.carousing = 1; self.eng = 1; self.ship_boat = 1; self.prosp = 1; self.vacc_suit = 1; self.nav = 1;
 
     
-
 # Begin Flow Chart
     
 def prospect1(p):
@@ -306,10 +307,68 @@ def applicationDenied(p) :
         result = goNoLicense(p);
     return result;
 
+# End flow chart functions
+# Begin number functions
+def invalid(x):
+    '''Determine if x is an integer
+    against several tests'''
+    if '.' in x:
+        return True
+    try:
+        x = int(x)
+        return False
+    except:
+        return True
+    return False
+
+def redo(y):
+    '''Require input from the user as long as
+    the input is not a valid integer or \'quit\''''
+    QUITWORDS = ('quit', 'exit', 'done', 'kill', 'end')
+    while invalid(y):
+        print("Sorry \"{0}\" is not a valid integer, please enter an integer".format(y))
+        y = input("Enter a valid Number or (S to specify): ")
+        if y in QUITWORDS:
+            sys.exit()
+    return int(y)
+
+# End number functions
+# Maintainence functions
+def assign():
+    p = person_t()
+    x = int(input("Enter Skill for Enginerring: "))
+    y = int(input("Enter Skill for Admin: "))
+    z = int(input("Enter Skill for Bribery: "))
+    a = int(input("Enter Skill for Leader: "))
+    b = int(input("Enter Skill for Carousing: "))
+    c = int(input("Enter Skill for Ship_Boat: "))
+    d = int(input("Enter Skill for Prosperity: "))
+    e = int(input("Enter Skill for Vac Suit: "))
+    f = int(input("Enter Skill for navigation: "))
+    p.eng = x; p.admin = y; p.bribery = z; p.leader = a; p.carousing = b; p.ship_boat = c; p.prosp = d; p.vacc_suit = e; p.nav = f;
+    return p
+
+def getStrikeRoll():
+    a = random.randint(1, 10)
+    b = random.randint(1, 8)
+    c = "0" * b
+    d = str(a) + c
+    return int(d)
+
+# End maintenance function
+
 def main () :
     global WEEKS 
-    p = person_t();
-    printf(bcolors.OKBLUE + "You apply for a license" + bcolors.ENDC)
+    x = input("Put in a number for all skills and hit enter \nOr type (S) and enter to specify each trait\nEntering nothing defaults all to 1: ")
+    if not x:
+        p = person_t()
+    elif x.strip() in ('s', 'S'):
+        p = assign()
+    else:
+        p = person_t()
+        x = redo(x)
+        p.admin =  p.bribery =  p.leader =  p.carousing =  p.eng =  p.ship_boat =  p.prosp =  p.vacc_suit =  p.nav = x;
+    printf(bcolors.OKBLUE + "\n\nYou apply for a license" + bcolors.ENDC)
     result = apply(p);
     if (result == 1) :
         printf("Belting")
@@ -320,17 +379,20 @@ def main () :
         printf(bcolors.OKBLUE + "Total weeks: " + str(WEEKS) + bcolors.ENDC)
         return result
     elif result == 3:
-        printf(bcolors.OKGREEN + "Strike" + bcolors.ENDC)
+        printf(bcolors.OKGREEN + "Strike: " + str(getStrikeRoll()) + bcolors.ENDC)
         printf(bcolors.OKBLUE + "Total weeks: " + str(WEEKS) + bcolors.ENDC)
         return result
     printf("End")
     printf(bcolors.OKBLUE + "Total weeks: " + str(WEEKS) + bcolors.ENDC)
     return 0;
 
+# Usage function
 def usage():
+    '''Check if usage is appropriate'''
     if len(sys.argv) > 2 or ('-s' not in sys.argv and len(sys.argv) > 1):
         raise SystemExit("Usage: $ python \"dice rolls.py\" [-s]\n-s : proceed slowly\n")
 
+# if-main
 if __name__ == '__main__':
     usage()
     main()
