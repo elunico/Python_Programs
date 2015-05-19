@@ -34,12 +34,13 @@ def invalid(x):
     return False
 
 def redo(y):
+    QUITWORDS = ('quit', 'exit', 'done', 'kill', 'end')
     while invalid(y):
         print("Sorry \"{0}\" is not a valid integer, please enter an integer".format(y))
         y = raw_input("Enter a valid Number: ")
         if y in QUITWORDS:
             sys.exit()
-    return y
+    return int(y)
 
 def main():
     x = raw_input("Enter a Number: ")
