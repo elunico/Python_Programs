@@ -25,6 +25,10 @@ import random
 import time
 import sys
 
+if '2.' in sys.version[0:2]:
+    def input(message):
+        return raw_input(message)
+
 # Global count weeks
 # each call to a function is a week of time in the game
 global WEEKS
