@@ -25,6 +25,7 @@ import random
 import time
 import sys
 
+# Python 2 catch
 if '2.' in sys.version[0:2]:
     def input(message):
         return raw_input(message)
@@ -49,7 +50,7 @@ def printf(string):
     '''Optionally delayed printing for dramatic effect'''
     print(string)
     if '-s' in sys.argv:
-        time.sleep(2)
+        time.sleep(1.3)
 
 def roll() :
     '''Two six sided dice are rolled'''
