@@ -49,8 +49,8 @@ class bcolors:
 def printf(string):
     '''Optionally delayed printing for dramatic effect'''
     print(string)
-    if '-s' in sys.argv:
-        time.sleep(1.3)
+    if '-s' not in sys.argv:
+        time.sleep(1.1)
 
 def roll() :
     '''Two six sided dice are rolled'''
@@ -61,7 +61,7 @@ def roll() :
 class person_t(object):
     '''Person object that keeps track of special traits'''
     def __init__(self):
-        self.admin = 1; self.bribery = 1; self.leader = 1; self.carousing = 1; self.eng = 1; self.ship_boat = 1; self.prosp = 1; self.vacc_suit = 1; self.nav = 1;
+        self.admin = 0; self.bribery = 0; self.leader = 0; self.carousing = 0; self.eng = 0; self.ship_boat = 0; self.prosp = 0; self.vacc_suit = 0; self.nav = 0;
 
     
 # Begin Flow Chart
@@ -347,7 +347,7 @@ def assign():
     a = int(input("Enter Skill for Leader: "))
     b = int(input("Enter Skill for Carousing: "))
     c = int(input("Enter Skill for Ship_Boat: "))
-    d = int(input("Enter Skill for Prosperity: "))
+    d = int(input("Enter Skill for Prospecting: "))
     e = int(input("Enter Skill for Vac Suit: "))
     f = int(input("Enter Skill for navigation: "))
     p.eng = x; p.admin = y; p.bribery = z; p.leader = a; p.carousing = b; p.ship_boat = c; p.prosp = d; p.vacc_suit = e; p.nav = f;
