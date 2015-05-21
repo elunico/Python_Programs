@@ -28,6 +28,8 @@ from os import system
 
 # Python 2 catch
 if '2.' in sys.version[0:2]:
+    def _input(message):
+        return input(message)
     def input(message):
         return raw_input(message)
 
@@ -336,6 +338,8 @@ def redo(y):
         y = input("Enter a valid Number or (S to specify): ")
         if y in QUITWORDS:
             sys.exit()
+        if y in ('s', 'S'):
+            return 's'
     return int(y)
 
 # End number functions
@@ -373,7 +377,10 @@ def main () :
     else:
         p = person_t()
         x = redo(x)
-        p.admin =  p.bribery =  p.leader =  p.carousing =  p.eng =  p.ship_boat =  p.prosp =  p.vacc_suit =  p.nav = x;
+        if x == 's':
+            p = assign()
+        else:
+            p.admin =  p.bribery =  p.leader =  p.carousing =  p.eng =  p.ship_boat =  p.prosp =  p.vacc_suit =  p.nav = x;
     printf(bcolors.OKBLUE + "\n\nYou apply for a license" + bcolors.ENDC)
     result = apply(p);
     if (result == 1) :
