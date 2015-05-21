@@ -20,10 +20,11 @@ Unless of course you like rolling dice, in which case
 I encourage you to endulge your passions.
 '''
 
-from __future__ import print_function
+from __future__ import print_function, division
 import random
 import time
 import sys
+from os import system
 
 # Python 2 catch
 if '2.' in sys.version[0:2]:
@@ -50,7 +51,7 @@ def printf(string):
     '''Optionally delayed printing for dramatic effect'''
     print(string)
     if '-s' not in sys.argv:
-        time.sleep(1.1)
+        time.sleep((random.random() / 2.5 + 0.97))
 
 def roll() :
     '''Two six sided dice are rolled'''
@@ -82,7 +83,7 @@ def prospect1(p):
 def prospect2(p):
     global WEEKS 
     WEEKS += 1 
-    printf(">> Prospecting...")
+    printf(">> Prospecting ...")
     a = roll() + p.prosp + p.eng + p.vacc_suit
     if a <= 8:
         result = prospect1(p)
@@ -364,7 +365,7 @@ def getStrikeRoll():
 
 def main () :
     global WEEKS 
-    x = input("Put in a number for all skills and hit enter \nOr type (S) and enter to specify each trait\nEntering nothing defaults all to 1: ")
+    x = input("Put in a number for all skills and hit enter \nOr type (S) and enter to specify each trait\nEntering nothing defaults all to 0: ")
     if not x:
         p = person_t()
     elif x.strip() in ('s', 'S'):
@@ -376,28 +377,32 @@ def main () :
     printf(bcolors.OKBLUE + "\n\nYou apply for a license" + bcolors.ENDC)
     result = apply(p);
     if (result == 1) :
-        printf("Belting")
-        printf(bcolors.OKBLUE + "Total weeks: " + str(WEEKS) + bcolors.ENDC)
+        print("Belting")
+        print(bcolors.OKBLUE + "Total weeks: " + str(WEEKS) + bcolors.ENDC)
         return result
     elif result == 2:
-        printf(bcolors.FAIL + "Dead"+ bcolors.ENDC)
-        printf(bcolors.OKBLUE + "Total weeks: " + str(WEEKS) + bcolors.ENDC)
+        print(bcolors.FAIL + "Dead"+ bcolors.ENDC)
+        print(bcolors.OKBLUE + "Total weeks: " + str(WEEKS) + bcolors.ENDC)
         return result
     elif result == 3:
-        printf(bcolors.OKGREEN + "Strike: " + str(getStrikeRoll()) + bcolors.ENDC)
-        printf(bcolors.OKBLUE + "Total weeks: " + str(WEEKS) + bcolors.ENDC)
+        print(bcolors.OKGREEN + "Strike: " + str(getStrikeRoll()) + bcolors.ENDC)
+        print(bcolors.OKBLUE + "Total weeks: " + str(WEEKS) + bcolors.ENDC)
         return result
-    printf("End")
-    printf(bcolors.OKBLUE + "Total weeks: " + str(WEEKS) + bcolors.ENDC)
+    print("End")
+    print(bcolors.OKBLUE + "Total weeks: " + str(WEEKS) + bcolors.ENDC)
     return 0;
 
 # Usage function
 def usage():
     '''Check if usage is appropriate'''
     if len(sys.argv) > 2 or ('-s' not in sys.argv and len(sys.argv) > 1):
-        raise SystemExit("Usage: $ python \"dice rolls.py\" [-s]\n-s : proceed slowly\n")
+        raise SystemExit("Usage: $ python \"Traveller_Asteroid_Belting.py\" [-s]\n-s : proceed in real time\n")
 
 # if-main
 if __name__ == '__main__':
+    if sys.platform.lower() == "darwin":
+        system('clear')
+    elif sys.platform.lower() == "win32" or sys.platform.lower() == 'windows_nt' or os.name.lower() == 'nt':
+        system('cls')
     usage()
     main()
