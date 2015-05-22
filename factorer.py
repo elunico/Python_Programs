@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # Ported from Ruby
 import math
 EXITWORDS = ['quit', 'exit', 'abort', 'done', 'end']
@@ -22,7 +23,7 @@ def redoer (y):
     if y in EXITWORDS:
       raise SystemExit
   return y
-
+ 
 def factor(n):
   factors = []
   newfactors = []
