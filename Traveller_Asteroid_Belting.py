@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Thomas Povinelli
 # branching.py
 # May 18-19, 2015
@@ -28,8 +29,7 @@ from os import system
 
 # Python 2 catch
 if '2.' in sys.version[0:2]:
-    def _input(message):
-        return input(message)
+    _input = input
     def input(message):
         return raw_input(message)
 
@@ -66,12 +66,12 @@ class person_t(object):
     def __init__(self):
         self.admin = 0; self.bribery = 0; self.leader = 0; self.carousing = 0; self.eng = 0; self.ship_boat = 0; self.prosp = 0; self.vacc_suit = 0; self.nav = 0;
 
-    
+
 # Begin Flow Chart
-    
+
 def prospect1(p):
-    global WEEKS 
-    WEEKS += 1 
+    global WEEKS
+    WEEKS += 1
     printf(">> Prospecting...")
     a = roll() + p.prosp + p.eng + p.vacc_suit
     if a <= 5:
@@ -83,8 +83,8 @@ def prospect1(p):
     return result
 
 def prospect2(p):
-    global WEEKS 
-    WEEKS += 1 
+    global WEEKS
+    WEEKS += 1
     printf(">> Prospecting ...")
     a = roll() + p.prosp + p.eng + p.vacc_suit
     if a <= 8:
@@ -96,8 +96,8 @@ def prospect2(p):
     return result
 
 def moveToTrojan(p):
-    global WEEKS 
-    WEEKS += 1 
+    global WEEKS
+    WEEKS += 1
     printf(">> Prospecting...")
     a = roll()
     if a <= 4:
@@ -111,8 +111,8 @@ def moveToTrojan(p):
     return result
 
 def moveToRRA(p):
-    global WEEKS 
-    WEEKS += 1 
+    global WEEKS
+    WEEKS += 1
     printf(">> Move to rumored area...")
     a = roll()
     if a <= 6:
@@ -126,8 +126,8 @@ def moveToRRA(p):
     return result
 
 def restAndRec(p):
-    global WEEKS 
-    WEEKS += 1 
+    global WEEKS
+    WEEKS += 1
     printf(">> Move to Rest and Recreation...")
     a = roll()
     if a < 5:
@@ -139,8 +139,8 @@ def restAndRec(p):
     return result
 
 def moveToCurrentProducingArea(p):
-    global WEEKS 
-    WEEKS += 1 
+    global WEEKS
+    WEEKS += 1
     printf(">> Move to current producing area...")
     a = roll()
     if a >= 8:
@@ -152,8 +152,8 @@ def moveToCurrentProducingArea(p):
     return result
 
 def moveToBeltFringe(p):
-    global WEEKS 
-    WEEKS += 1 
+    global WEEKS
+    WEEKS += 1
     printf(">> Move to belt fringe...")
     a = roll()
     if a <= 4:
@@ -166,8 +166,8 @@ def moveToBeltFringe(p):
         result = prospect2(p)
 
 def danger(p):
-    global WEEKS 
-    WEEKS += 1 
+    global WEEKS
+    WEEKS += 1
     printf(bcolors.FAIL + ">> Danger!" + bcolors.ENDC)
     a = roll()
     if a >= 6 and a <= 9:
@@ -179,8 +179,8 @@ def danger(p):
     return result
 
 def refuel(p):
-    global WEEKS 
-    WEEKS += 1 
+    global WEEKS
+    WEEKS += 1
     printf(">> Refuel...")
     a = roll() + p.eng + p.ship_boat
     if a >= 8:
@@ -190,8 +190,8 @@ def refuel(p):
     return result
 
 def needRefuel(p):
-    global WEEKS 
-    WEEKS += 1 
+    global WEEKS
+    WEEKS += 1
     printf(">> Need Refuel...")
     a = roll()
     if a <= 10:
@@ -201,8 +201,8 @@ def needRefuel(p):
     return result
 
 def patronAssists(p):
-    global WEEKS 
-    WEEKS += 1 
+    global WEEKS
+    WEEKS += 1
     printf(bcolors.OKGREEN + ">> Patron assists..." + bcolors.ENDC)
     a = roll() + p.leader
     if a >= 10:
@@ -212,8 +212,8 @@ def patronAssists(p):
     return result
 
 def selectAreaOfProspect(p) :
-    global WEEKS 
-    WEEKS += 1 
+    global WEEKS
+    WEEKS += 1
     printf(">> Selecting Area of Prospect...")
     attempt = roll() + p.eng + p.nav;
     if (attempt <= 4) :
@@ -225,8 +225,8 @@ def selectAreaOfProspect(p) :
     return result;
 
 def goNoLicense(p) :
-    global WEEKS 
-    WEEKS += 1 
+    global WEEKS
+    WEEKS += 1
     printf(">> Go mine without license...")
     attempt = roll();
     if (attempt <= 5) :
@@ -236,8 +236,8 @@ def goNoLicense(p) :
     return result;
 
 def seekPatron (p) :
-    global WEEKS 
-    WEEKS += 1 
+    global WEEKS
+    WEEKS += 1
     printf(">> Seek patron...")
     attempt = roll();
     if (attempt <= 4) :
@@ -249,8 +249,8 @@ def seekPatron (p) :
     return result;
 
 def makeSpecialApplication(p) :
-    global WEEKS 
-    WEEKS += 1 
+    global WEEKS
+    WEEKS += 1
     printf(">> Make Special Application...")
     attempt = roll();
     if (attempt>= 9 ) :
@@ -261,8 +261,8 @@ def makeSpecialApplication(p) :
     return result;
 
 def considerBribe(p) :
-    global WEEKS 
-    WEEKS += 1 
+    global WEEKS
+    WEEKS += 1
     printf(">> Consider Bribery...")
     attempt = roll();
     if (attempt >= 8) :
@@ -274,8 +274,8 @@ def considerBribe(p) :
     return result;
 
 def offerBribe(p) :
-    global WEEKS 
-    WEEKS += 1 
+    global WEEKS
+    WEEKS += 1
     printf(">> Offer bribery...")
     attempt = roll();
     if (attempt <= 5) :
@@ -288,8 +288,8 @@ def offerBribe(p) :
     return result;
 
 def apply(p) :
-    global WEEKS 
-    WEEKS += 1 
+    global WEEKS
+    WEEKS += 1
     printf(bcolors.OKGREEN + ">> Begin Application..." + bcolors.ENDC)
     apply = roll();
     if (apply <= 7) :
@@ -299,8 +299,8 @@ def apply(p) :
     return result;
 
 def applicationDenied(p) :
-    global WEEKS 
-    WEEKS += 1 
+    global WEEKS
+    WEEKS += 1
     printf(">> Application Denied...")
     attempt = roll();
     if (attempt <= 3) :
@@ -368,7 +368,7 @@ def getStrikeRoll():
 # End maintenance function
 
 def main () :
-    global WEEKS 
+    global WEEKS
     x = input("Put in a number for all skills and hit enter \nOr type (S) and enter to specify each trait\nEntering nothing defaults all to 0: ")
     if not x:
         p = person_t()
