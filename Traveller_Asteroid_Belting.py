@@ -402,14 +402,14 @@ def main () :
 # Usage function
 def usage():
     '''Check if usage is appropriate'''
-    if len(sys.argv) > 2 or ('-s' not in sys.argv and len(sys.argv) > 1):
-        raise SystemExit("Usage: $ python \"Traveller_Asteroid_Belting.py\" [-s]\n-s : proceed in real time\n")
+    if len(sys.argv) > 2 or ('-s' not in sys.argv and len(sys.argv) > 1): # Nice logics 
+        raise SystemExit("Usage: $ python \"{0}\" [-s]\n-s : proceed in real time\n".format(__file__))
 
 # if-main
 if __name__ == '__main__':
+    usage()
     if sys.platform.lower() == "darwin":
         system('clear')
     elif sys.platform.lower() == "win32" or sys.platform.lower() == 'windows_nt' or os.name.lower() == 'nt':
         system('cls')
-    usage()
     main()
