@@ -40,14 +40,14 @@ WEEKS = 0
 
 class bcolors:
     '''Constants used to change terminal color'''
-    HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKGREEN = '\033[92m'
-    WARNING = '\033[93m'
-    FAIL = '\033[91m'
-    ENDC = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
+    HEADER = '\033[95m' if sys.platform == 'darwin' else ''
+    OKBLUE = '\033[94m' if sys.platform == 'darwin' else ''
+    OKGREEN = '\033[92m' if sys.platform == 'darwin' else ''
+    WARNING = '\033[93m' if sys.platform == 'darwin' else ''
+    FAIL = '\033[91m' if sys.platform == 'darwin' else ''
+    ENDC = '\033[0m' if sys.platform == 'darwin' else ''
+    BOLD = '\033[1m' if sys.platform == 'darwin' else ''
+    UNDERLINE = '\033[4m' if sys.platform == 'darwin' else ''
 
 def printf(string):
     '''Optionally delayed printing for dramatic effect'''

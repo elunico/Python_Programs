@@ -100,14 +100,14 @@ class Application(object):
         row = 0
         col = 0
         for i in pressures:
-            Label(answer, text=i, font=("Courier New", "14", "normal")).grid(row=row, column=col, padx=5, pady=5)
+            Label(answer, text=i, font=("Courier New", "13", "normal")).grid(row=row, column=col, padx=5, pady=5)
             row += 1
             if row == 18:
                 col += 1
                 row = 0
-        Label(answer, text="Total:", font=("Courier New", "14", "bold")).grid(row=row, column=col)
+        Label(answer, text="Total:", font=("Courier New", "13", "bold")).grid(row=row, column=col)
         row += 1
-        Label(answer, text=total, font=("Courier New", "14", "bold")).grid(row=row, column=col)
+        Label(answer, text=total, font=("Courier New", "13", "bold")).grid(row=row, column=col)
         if row == 18:
             col += 1
             row = 0
