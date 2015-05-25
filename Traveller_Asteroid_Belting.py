@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
-# Thomas Povinelli
+# Thomas
 # branching.py
 # May 18-19, 2015
-# 105 minutes
-# 2 languages - 1 living; 1 dead
-# 64000 successful tests in less than 7 seconds
 
 '''
 I wrote this for a game. It involved a long and complex
@@ -39,7 +36,7 @@ global WEEKS
 WEEKS = 0
 
 class bcolors:
-    '''Constants used to change terminal color'''
+    '''Constants used to change terminal color (Mac only)'''
     HEADER = '\033[95m' if sys.platform == 'darwin' else ''
     OKBLUE = '\033[94m' if sys.platform == 'darwin' else ''
     OKGREEN = '\033[92m' if sys.platform == 'darwin' else ''
@@ -402,7 +399,7 @@ def main () :
 # Usage function
 def usage():
     '''Check if usage is appropriate'''
-    if len(sys.argv) > 2 or ('-s' not in sys.argv and len(sys.argv) > 1): # Nice logics 
+    if len(sys.argv) > 2 or ('-s' not in sys.argv and len(sys.argv) > 1): # Nice logics
         raise SystemExit("Usage: $ python \"{0}\" [-s]\n-s : proceed in real time\n".format(__file__))
 
 # if-main
