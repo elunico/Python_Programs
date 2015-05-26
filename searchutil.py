@@ -11,7 +11,7 @@ EXITWORDS = ('quit', 'exit', 'abort', 'done', 'end')
 
 if "2." in sys.version[0:2]:
     _input = input
-    def input(message):
+    def input(message=''):
         return raw_input(message)
 
 def contains(haystack, needle):
@@ -44,6 +44,10 @@ def find(phrase, haystack):
 
 def isInvalidInt (x):
 	'''Determine if x is a valid integer'''
+	if not isinstance(x, str) and isinstance(x, int):
+	    return False
+	if not isinstance(x, str) and not isinstance(x, int):
+	    return True
 	if "." in x :
 		return True
 	for i in x:
@@ -58,7 +62,7 @@ def isInvalidInt (x):
 
 def rescanForInt (y):
 	'''Continuously ask for input while y is not a valid int'''
-	while invalid(y) :
+	while isInvalidInt(y) :
 		print "Sorry " + y + " is not a valid integer, please enter an integer"
 		print "\nEnter a number: "
 		y = input()
