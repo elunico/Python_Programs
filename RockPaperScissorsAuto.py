@@ -9,7 +9,7 @@ import random
 class Application(object):
 	def window(self):
 		self.userScissors()
-	
+
 	def computerMove(self):
 		if self.result == 'draw':
 			if self.last == 'rock':
@@ -30,7 +30,7 @@ class Application(object):
 		else:
 			self.cpuMove = random.choice(self.choices)
 		return self.cpuMove
-	
+
 	def computer2Move(self):
 		if self.result2 == 'draw':
 			if self.last == 'rock':
@@ -51,7 +51,7 @@ class Application(object):
 		else:
 			self.cpuMove = random.choice(self.choices)
 		return self.cpuMove
-	
+
 	def __init__(self):
 		self.choices = ['rock', 'paper', 'scissors']
 		self.last = ''
@@ -79,7 +79,7 @@ class Application(object):
 		self.scoreLT.grid(row = 2, column =0)
 		self.scoreT.grid(row=2, column=1)
 		self.window()
-	
+
 	def userScissors(self):
 		self.last = 'scissors'
 		self.userMove = self.computerMove()
@@ -91,7 +91,7 @@ class Application(object):
 		elif self.cpuMove == 'paper':
 			self.win(self.userMove, 'paper')
 		self.sc += 1
-	
+
 	def lose(self, p, c):
 		self.result = 'draw'
 		self.result2 = 'win'
@@ -99,7 +99,7 @@ class Application(object):
 		self.scoreC = Label(self.score, text=self.cscore)
 		self.scoreC.grid(row = 0, column =1)
 		self.score.update()
-	
+
 	def win(self, p, c):
 		self.result = 'lose'
 		self.result2 = 'win'
@@ -107,7 +107,7 @@ class Application(object):
 		self.scoreP = Label(self.score, text=self.pscore)
 		self.scoreP.grid(row = 1, column=1)
 		self.score.update()
-	
+
 	def draw(self, p):
 		self.result = 'win'
 		self.result2 = 'win'
@@ -115,11 +115,11 @@ class Application(object):
 		self.scoreT = Label(self.score, text=self.tscore)
 		self.scoreT.grid(row=2, column=1)
 		self.score.update()
-	
+
 
 def main():
 	A = Application()
-	for i in range(100):
+	for i in xrange(100):
 		A.window()
 	raw_input("_ ")
 
