@@ -1,4 +1,4 @@
-import os
+import sys
 import string
 
 ESCAPES = ('\n', '\r', '\t', '\a')
@@ -8,6 +8,11 @@ UPPERCASE = tuple([j for j in string.uppercase])
 ALPHABET = tuple([k for k in string.letters])
 DIGITS = tuple([l for l in string.digits])
 EXITWORDS = ('quit', 'exit', 'abort', 'done', 'end')
+
+if "2." in sys.version[0:2]:
+    _input = input
+    def input(message):
+        return raw_input(message)
 
 def contains(haystack, needle):
 	'''Checks for presence of each element of needle in haystack
@@ -56,7 +61,7 @@ def rescanForInt (y):
 	while invalid(y) :
 		print "Sorry " + y + " is not a valid integer, please enter an integer"
 		print "\nEnter a number: "
-		y = raw_input()
+		y = input()
 		if y in EXITWORDS:
 			raise SystemExit
 	return y
