@@ -15,19 +15,19 @@ if "2." in sys.version[0:2]:
         return raw_input(message)
 
 def contains(haystack, needle):
-	'''Checks for presence of each element of needle in haystack
-	unless needle is a string then checks for needle in haystack'''
-	if isinstance(needle, str):
-		return needle in haystack
-	return str_contains(haystack, needle)
+    '''Checks for presence of each element of needle in haystack
+    unless needle is a string then checks for needle in haystack'''
+    if isinstance(needle, str):
+        return needle in haystack
+    return str_contains(haystack, needle)
 
 def str_contains(haystack, needle):
-	'''Checks for presence of each element of needle in haystack
-	breaking strings into characters if necessary'''
-	for i in needle:
-		if i in haystack:
-			return True
-	return False
+    '''Checks for presence of each element of needle in haystack
+    breaking strings into characters if necessary'''
+    for i in needle:
+        if i in haystack:
+            return True
+    return False
 
 
 def findWithOverlap(phrase, haystack):
@@ -65,29 +65,29 @@ def find(phrase, haystack):
     return r
 
 def isInvalidInt (x):
-	'''Determine if x is a valid integer'''
-	if not isinstance(x, str) and isinstance(x, int):
-	    return False
-	if not isinstance(x, str) and not isinstance(x, int):
-	    return True
-	if "." in x :
-		return True
-	for i in x:
-		if i not in DIGITS:
-			return True
-	try:
-		x = int(x)
-		return False
-	except Exception:
-		return True
-	return False
+    '''Determine if x is a valid integer'''
+    if not isinstance(x, str) and isinstance(x, int):
+        return False
+    if not isinstance(x, str) and not isinstance(x, int):
+        return True
+    if "." in x :
+        return True
+    for i in x:
+        if i not in DIGITS:
+            return True
+    try:
+        x = int(x)
+        return False
+    except Exception:
+        return True
+    return False
 
 def rescanForInt (y):
-	'''Continuously ask for input while y is not a valid int'''
-	while isInvalidInt(y) :
-		print "Sorry " + y + " is not a valid integer, please enter an integer"
-		print "\nEnter a number: "
-		y = input()
-		if y in EXITWORDS:
-			raise SystemExit
-	return y
+    '''Continuously ask for input while y is not a valid int'''
+    while isInvalidInt(y) :
+        print "Sorry " + y + " is not a valid integer, please enter an integer"
+        print "\nEnter a number: "
+        y = input()
+        if y in EXITWORDS:
+            raise SystemExit
+    return y
