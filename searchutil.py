@@ -1,5 +1,6 @@
 import sys
 import string
+import re
 
 ESCAPES = ('\n', '\r', '\t', '\a')
 WHITESPACE = ('\t', '\n', '\x0b', '\x0c', '\r', ' ')
@@ -28,7 +29,6 @@ def str_contains(needle, haystack):
         if i in haystack:
             return True
     return False
-
 
 def findWithOverlap(phrase, haystack):
     '''A function that finds a phrase of characters
@@ -63,6 +63,13 @@ def find(phrase, haystack):
             found = 1
     r = phrase_list if phrase_list else -1
     return r
+
+def findWithRe(pattern, string, defaultValue=None):
+    match = re.search(pattern, string)
+    if not match:
+        return defaultValue
+    if match:
+        return match.group()
 
 def isInvalidInt (x):
     '''Determine if x is a valid integer'''
