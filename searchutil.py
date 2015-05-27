@@ -29,16 +29,38 @@ def str_contains(haystack, needle):
 			return True
 	return False
 
-def find(phrase, haystack):
+
+def findWithOverlap(phrase, haystack):
     '''A function that finds a phrase of characters
     of arbitrary length within a string. Returns
-    a list of indexes the begin with the first char of the
+    a list of indexes of possibly overlapping occurrences the begin with the first char of the
     needle. '''
     phrase_list = []
     phrase_len = len(phrase)
+    found = 0
     for i in range(0, len(haystack) - phrase_len, 1): # That '1' was the fatal mistake I needed to fix
         if phrase == haystack[i:i+phrase_len]:
             phrase_list.append(i)
+    r = phrase_list if phrase_list else -1
+    return r
+
+def find(phrase, haystack):
+    '''A function that finds a phrase of characters
+    of arbitrary length within a string. Returns
+    a list of indexes of non overlapping occurrences the begin with the first char of the
+    needle. '''
+    phrase_list = []
+    phrase_len = len(phrase)
+    found = 0
+    for i in range(0, len(haystack) - phrase_len, 1): # That '1' was the fatal mistake I needed to fix
+        if found >= len(phrase):
+            found = 0
+        if found > 0 and found < len(phrase):
+            found += 1
+            continue
+        if phrase == haystack[i:i+phrase_len]:
+            phrase_list.append(i)
+            found = 1
     r = phrase_list if phrase_list else -1
     return r
 
