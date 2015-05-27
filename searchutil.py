@@ -52,7 +52,7 @@ def find(phrase, haystack):
     phrase_list = []
     phrase_len = len(phrase)
     found = 0
-    for i in range(0, len(haystack) - phrase_len, 1): # That '1' was the fatal mistake I needed to fix
+    for i in range(0, len(haystack) - phrase_len + 1, 1): # That '1' was the fatal mistake I needed to fix
         if found >= len(phrase):
             found = 0
         if found > 0 and found < len(phrase):
@@ -91,3 +91,6 @@ def rescanForInt (y):
         if y in EXITWORDS:
             raise SystemExit
     return y
+
+if __name__ == '__main__':
+    print find('sss', 'ssssss')
