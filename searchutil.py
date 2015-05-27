@@ -13,15 +13,15 @@ if "2." in sys.version[0:2]:
     _input = input
     def input(message=''):
         return raw_input(message)
-
-def contains(haystack, needle):
+    
+def contains(needle, haystack):
     '''Checks for presence of each element of needle in haystack
     unless needle is a string then checks for needle in haystack'''
     if isinstance(needle, str):
         return needle in haystack
-    return str_contains(haystack, needle)
+    return str_contains(needle, haystack)
 
-def str_contains(haystack, needle):
+def str_contains(needle, haystack):
     '''Checks for presence of each element of needle in haystack
     breaking strings into characters if necessary'''
     for i in needle:
