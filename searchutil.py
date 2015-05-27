@@ -19,7 +19,7 @@ def contains(haystack, needle):
 	unless needle is a string then checks for needle in haystack'''
 	if isinstance(needle, str):
 		return needle in haystack
-	str_contains(haystack, needle)
+	return str_contains(haystack, needle)
 
 def str_contains(haystack, needle):
 	'''Checks for presence of each element of needle in haystack
