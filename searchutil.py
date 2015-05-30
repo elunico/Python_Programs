@@ -40,7 +40,7 @@ def findWithOverlap(phrase, haystack):
     phrase_list = []
     phrase_len = len(phrase)
     found = 0
-    for i in range(0, len(haystack) - phrase_len, 1): # That '1' was the fatal mistake I needed to fix
+    for i in xrange(0, len(haystack) - phrase_len, 1): # That '1' was the fatal mistake I needed to fix
         if phrase == haystack[i:i+phrase_len]:
             phrase_list.append(i)
     r = phrase_list if phrase_list else -1
@@ -54,7 +54,7 @@ def find(phrase, haystack):
     phrase_list = []
     phrase_len = len(phrase)
     found = 0
-    for i in range(0, len(haystack) - phrase_len + 1, 1): # That '1' was the fatal mistake I needed to fix
+    for i in xrange(0, len(haystack) - phrase_len + 1, 1): # That '1' was the fatal mistake I needed to fix
         if found >= len(phrase):
             found = 0
         if found > 0 and found < len(phrase):
@@ -94,8 +94,8 @@ def isInvalidInt (x):
 def rescanForInt (y):
     '''Continuously ask for input while y is not a valid int'''
     while isInvalidInt(y) :
-        print "Sorry " + y + " is not a valid integer, please enter an integer"
-        print "\nEnter a number: "
+        print("Sorry " + y + " is not a valid integer, please enter an integer")
+        print("\nEnter a number: ")
         y = input()
         if y in EXITWORDS:
             raise SystemExit
@@ -106,17 +106,17 @@ def findandprint(needle, haystack, echo=True):
     if contains(needle, haystack):
         q = find(needle, haystack)
         if echo:
-            print "\n\nWe found {} occurrences of {} in {}\n".format(len(q), needle, haystack)
-            for i in range(len(haystack)):
+            print("\n\nWe found {} occurrences of {} in {}\n".format(len(q), needle, haystack))
+            for i in xrange(len(haystack)):
                 if i in q:
-                    print tcolors.red,
+                    print(tcolors.red,)
                     temp = i + len(needle)
                 if i == temp:
-                    print tcolors.end,
-                print haystack[i],
+                    print(tcolors.end,)
+                print(haystack[i],)
         else:
             return_string = ''
-            for i in range(len(haystack)):
+            for i in xrange(len(haystack)):
                 if i in q:
                     return_string += tcolors.red
                     temp = i + len(needle)
@@ -125,17 +125,17 @@ def findandprint(needle, haystack, echo=True):
                 return_string += haystack[i]
             return return_string
     else:
-        print "\nNo matches found in {}".format(haystack)
+        print("\nNo matches found in {}".format(haystack))
 
 def demo():
     a = input("Hello. Please enter any letters: ").lower().strip()
-    b = "".join([LOWERCASE[random.randint(0, len(LOWERCASE)-1)] for i in range(400)])
+    b = "".join([LOWERCASE[random.randint(0, len(LOWERCASE)-1)] for i in xrange(400)])
     findandprint(a, b)
     print; print
     g = input("\n\nEnter an integer please: ")
     g = int(rescanForInt(g))
-    print "\n\nThank you."
-    print "-*-*-*-*-*-*-*-*-*-END-*-*-*-*-*-*-*-*-*-"
+    print("\n\nThank you.")
+    print("-*-*-*-*-*-*-*-*-*-END-*-*-*-*-*-*-*-*-*-")
 
 if __name__ == '__main__':
     demo()
