@@ -1,6 +1,8 @@
 import sys
 import string
 import re
+import random
+import tcolors
 
 ESCAPES = ('\n', '\r', '\t', '\a')
 WHITESPACE = ('\t', '\n', '\x0b', '\x0c', '\r', ' ')
@@ -14,7 +16,7 @@ if "2." in sys.version[0:2]:
     _input = input
     def input(message=''):
         return raw_input(message)
-    
+
 def contains(needle, haystack):
     '''Checks for presence of each element of needle in haystack
     unless needle is a string then checks for needle in haystack'''
@@ -61,7 +63,7 @@ def find(phrase, haystack):
         if phrase == haystack[i:i+phrase_len]:
             phrase_list.append(i)
             found = 1
-    r = phrase_list if phrase_list else -1
+    r = phrase_list if phrase_list else []
     return r
 
 def findWithRe(pattern, string, defaultValue=None):
@@ -99,5 +101,41 @@ def rescanForInt (y):
             raise SystemExit
     return y
 
+def findandprint(needle, haystack, echo=True):
+    temp = -1
+    if contains(needle, haystack):
+        q = find(needle, haystack)
+        if echo:
+            print "\n\nWe found {} occurrences of {} in {}\n".format(len(q), needle, haystack)
+            for i in range(len(haystack)):
+                if i in q:
+                    print tcolors.red,
+                    temp = i + len(needle)
+                if i == temp:
+                    print tcolors.end,
+                print haystack[i],
+        else:
+            return_string = ''
+            for i in range(len(haystack)):
+                if i in q:
+                    return_string += tcolors.red
+                    temp = i + len(needle)
+                if i == temp:
+                    return_string += tcolors.end
+                return_string += haystack[i]
+            return return_string
+    else:
+        print "\nNo matches found in {}".format(haystack)
+
+def demo():
+    a = input("Hello. Please enter any letters: ").lower().strip()
+    b = "".join([LOWERCASE[random.randint(0, len(LOWERCASE)-1)] for i in range(400)])
+    findandprint(a, b)
+    print; print
+    g = input("\n\nEnter an integer please: ")
+    g = int(rescanForInt(g))
+    print "\n\nThank you."
+    print "-*-*-*-*-*-*-*-*-*-END-*-*-*-*-*-*-*-*-*-"
+
 if __name__ == '__main__':
-    print find('sss', 'ssssss')
+    demo()
