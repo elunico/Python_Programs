@@ -1,21 +1,26 @@
+from __future__ import print_function
 import sys
 import string
 import re
 import random
 import tcolors
 
-ESCAPES = ('\n', '\r', '\t', '\a')
-WHITESPACE = ('\t', '\n', '\x0b', '\x0c', '\r', ' ')
-LOWERCASE = tuple([i for i in string.lowercase])
-UPPERCASE = tuple([j for j in string.uppercase])
-ALPHABET = tuple([k for k in string.letters])
-DIGITS = tuple([l for l in string.digits])
-EXITWORDS = ('quit', 'exit', 'abort', 'done', 'end')
-
 if "2." in sys.version[0:2]:
+    VERSION = 2
     _input = input
     def input(message=''):
         return raw_input(message)
+else:
+    VERSION = 3
+    xrange = range
+
+ESCAPES = ('\n', '\r', '\t', '\a')
+WHITESPACE = ('\t', '\n', '\x0b', '\x0c', '\r', ' ')
+LOWERCASE = tuple([i for i in string.lowercase]) if VERSION < 3 else tuple([i for i in string.ascii_lowercase])
+UPPERCASE = tuple([j for j in string.uppercase]) if VERSION < 3 else tuple([i for i in string.ascii_uppercase])
+ALPHABET = tuple([k for k in string.letters]) if VERSION < 3 else tuple([i for i in string.ascii_letters])
+DIGITS = tuple([l for l in string.digits])
+EXITWORDS = ('quit', 'exit', 'abort', 'done', 'end')
 
 def contains(needle, haystack):
     '''Checks for presence of each element of needle in haystack
@@ -109,11 +114,11 @@ def findandprint(needle, haystack, echo=True):
             print("\n\nWe found {} occurrences of {} in {}\n".format(len(q), needle, haystack))
             for i in xrange(len(haystack)):
                 if i in q:
-                    print(tcolors.red,)
+                    print(tcolors.red, end = '')
                     temp = i + len(needle)
                 if i == temp:
-                    print(tcolors.end,)
-                print(haystack[i],)
+                    print(tcolors.end, end= '')
+                print(haystack[i], end ='')
         else:
             return_string = ''
             for i in xrange(len(haystack)):
