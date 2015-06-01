@@ -22,6 +22,14 @@ ALPHABET = tuple([k for k in string.letters]) if VERSION < 3 else tuple([i for i
 DIGITS = tuple([l for l in string.digits])
 EXITWORDS = ('quit', 'exit', 'abort', 'done', 'end')
 
+def reverse(array):
+    return list(reversed(array))
+
+def pop_first(array):
+    temp = list(reversed(array))
+    popd = temp.pop()
+    return popd, list(reversed(temp))
+
 def contains(needle, haystack):
     '''Checks for presence of each element of needle in haystack
     unless needle is a string then checks for needle in haystack'''
