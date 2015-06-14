@@ -26,9 +26,10 @@ def reverse(array):
     return list(reversed(array))
 
 def pop_first(array):
-    temp = list(reversed(array))
-    popd = temp.pop()
-    return popd, list(reversed(temp))
+    array.reverse()
+    popd = array.pop()
+    array.reverse()
+    return popd
 
 def contains(needle, haystack):
     '''Checks for presence of each element of needle in haystack
