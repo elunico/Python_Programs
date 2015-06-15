@@ -1,6 +1,9 @@
 '''Printing these constants will
 change to the indicated color until 
-otherwise specified by a new color'''
+otherwise specified by a new color
+
+You can also call the functions to
+make the colors change that way'''
 
 __all__ = ['magenta', 'purple', 'blue', 'green', '_pass', 'Pass', 'ok',
            'yellow', 'warn', 'warning', 'red', 'error', 'fail', 'end',
@@ -24,15 +27,15 @@ def changeColor(color):
     try:
         assert c in colors.keys()
     except AssertionError:
-        print "You must choose from {}".format(colors.keys())
+        print ("You must choose from {}".format(list(colors.keys())))
         return 1
-    print colors[c]
+    print (colors[c])
 
 def clearAll():
-    print end
+    print (end)
 
 def makeBold():
-    print bold
+    print (bold)
 
 def makeUnderline():
-    print underline
+    print (underline)
