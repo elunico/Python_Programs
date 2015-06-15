@@ -22,8 +22,9 @@ from __future__ import print_function, division
 import random
 import time
 import sys
+import tcolors # Not a builtin, requires tcolors.py file (written by me)
 from os import system
-
+        
 # Python 2 catch
 if '2.' in sys.version[0:2]:
     _input = input
@@ -35,17 +36,6 @@ if '2.' in sys.version[0:2]:
 global WEEKS
 WEEKS = 0
 
-class bcolors:
-    '''Constants used to change terminal color (Mac only)'''
-    HEADER = '\033[95m' if sys.platform == 'darwin' else ''
-    OKBLUE = '\033[94m' if sys.platform == 'darwin' else ''
-    OKGREEN = '\033[92m' if sys.platform == 'darwin' else ''
-    WARNING = '\033[93m' if sys.platform == 'darwin' else ''
-    FAIL = '\033[91m' if sys.platform == 'darwin' else ''
-    ENDC = '\033[0m' if sys.platform == 'darwin' else ''
-    BOLD = '\033[1m' if sys.platform == 'darwin' else ''
-    UNDERLINE = '\033[4m' if sys.platform == 'darwin' else ''
-
 def printf(string):
     '''Optionally delayed printing for dramatic effect'''
     print(string)
@@ -54,7 +44,7 @@ def printf(string):
 
 def roll() :
     '''Two six sided dice are rolled'''
-    r = random.randint(2, 13)
+    r = random.randint(2, 12)
     return r;
 
 # Keeps track of player's traits during the proceedings of the chart
@@ -165,7 +155,7 @@ def moveToBeltFringe(p):
 def danger(p):
     global WEEKS
     WEEKS += 1
-    printf(bcolors.FAIL + ">> Danger!" + bcolors.ENDC)
+    printf(tcolors.red + ">> Danger!" + tcolors.end)
     a = roll()
     if a >= 6 and a <= 9:
         result = 2
@@ -200,7 +190,7 @@ def needRefuel(p):
 def patronAssists(p):
     global WEEKS
     WEEKS += 1
-    printf(bcolors.OKGREEN + ">> Patron assists..." + bcolors.ENDC)
+    printf(tcolors.green + ">> Patron assists..." + tcolors.end)
     a = roll() + p.leader
     if a >= 10:
         result = makeSpecialApplication(p)
@@ -251,7 +241,7 @@ def makeSpecialApplication(p) :
     printf(">> Make Special Application...")
     attempt = roll();
     if (attempt>= 9 ) :
-        printf(bcolors.OKGREEN + ">> License Granted!" + bcolors.ENDC)
+        printf(tcolors.green + ">> License Granted!" + tcolors.end)
         result = selectAreaOfProspect(p);
     else :
         result = applicationDenied(p);
@@ -280,14 +270,14 @@ def offerBribe(p) :
     elif (attempt >= 6 and attempt <= 9) :
         result = apply(p);
     else :
-        printf(bcolors.OKGREEN + ">> License Granted!" + bcolors.ENDC)
+        printf(tcolors.green + ">> License Granted!" + tcolors.end)
         result = selectAreaOfProspect(p);
     return result;
 
 def apply(p) :
     global WEEKS
     WEEKS += 1
-    printf(bcolors.OKGREEN + ">> Begin Application..." + bcolors.ENDC)
+    printf(tcolors.green + ">> Begin Application..." + tcolors.end)
     apply = roll();
     if (apply <= 7) :
         result = applicationDenied(p);
@@ -366,7 +356,10 @@ def getStrikeRoll():
 
 def main () :
     global WEEKS
-    x = input("Put in a number for all skills and hit enter \nOr type (S) and enter to specify each trait\nEntering nothing defaults all to 0: ")
+    try:
+        x = input("Put in a number for all skills and hit enter \nOr type (S) and enter to specify each trait\nEntering nothing defaults all to 0: ")
+    except EOFError:
+        x = 0
     if not x:
         p = person_t()
     elif x.strip() in ('s', 'S'):
@@ -378,22 +371,22 @@ def main () :
             p = assign()
         else:
             p.admin =  p.bribery =  p.leader =  p.carousing =  p.eng =  p.ship_boat =  p.prosp =  p.vacc_suit =  p.nav = x;
-    printf(bcolors.OKBLUE + "\n\nYou apply for a license" + bcolors.ENDC)
+    printf(tcolors.blue + "\n\nYou apply for a license" + tcolors.end)
     result = apply(p);
     if (result == 1) :
         print("Belting")
-        print(bcolors.OKBLUE + "Total weeks: " + str(WEEKS) + bcolors.ENDC)
+        print(tcolors.blue + "Total weeks: " + str(WEEKS) + tcolors.end)
         return result
     elif result == 2:
-        print(bcolors.FAIL + "Dead"+ bcolors.ENDC)
-        print(bcolors.OKBLUE + "Total weeks: " + str(WEEKS) + bcolors.ENDC)
+        print(tcolors.red + "Dead"+ tcolors.end)
+        print(tcolors.blue + "Total weeks: " + str(WEEKS) + tcolors.end)
         return result
     elif result == 3:
-        print(bcolors.OKGREEN + "Strike: " + str(getStrikeRoll()) + bcolors.ENDC)
-        print(bcolors.OKBLUE + "Total weeks: " + str(WEEKS) + bcolors.ENDC)
+        print(tcolors.green + "Strike: " + str(getStrikeRoll()) + tcolors.end)
+        print(tcolors.blue + "Total weeks: " + str(WEEKS) + tcolors.end)
         return result
     print("End")
-    print(bcolors.OKBLUE + "Total weeks: " + str(WEEKS) + bcolors.ENDC)
+    print(tcolors.blue + "Total weeks: " + str(WEEKS) + tcolors.end)
     return 0;
 
 # Usage function
