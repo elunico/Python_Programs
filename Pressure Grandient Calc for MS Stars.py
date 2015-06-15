@@ -33,7 +33,7 @@ def heq(limit = 45, radius = 23193333, density=4.5, step=45000000):
 
 class Application(object):
     def __init__(self):
-        pass
+        self.main()
     def main(self):
         self.root = Tk()
         self.root.title("Pressure Gradient Calculator")
