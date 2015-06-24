@@ -87,16 +87,16 @@ class Application(object):
 
     def getStuff(self):
         return self.theClient, self.to_a, self.usn, self.unpw, self.sujeto, self.mes
-    
+
     def send(self):
         self.theClient = self.client.get()
         self.to_a = self.e1.get()
         self.usn = self.e2.get()
         self.unpw = self.e3.get()
         self.sujeto = self.e4.get()
-        self.mes = self.e5.get('1.0', END)
+        self.mes = self.e5.get('0.0', END)
         self.root.destroy()
-    
+
     def main(self):
         self.root = Tk()
         self.root.title("Compose Email")
@@ -132,7 +132,7 @@ class Application(object):
         self.e5.pack()
         sendb.pack()
         self.root.mainloop()
-    
+
 
 def main():
     a = Application()
