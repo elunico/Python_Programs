@@ -4,7 +4,7 @@ import extlib
 
 
 def usage():
-    print ("Usage:\n$ python stringletters.py [-cps ignore_all] "
+    print ("Usage:\n$ python stringletters.py \"string\" [-cps ignore_all] "
            "[-c ignore_caps] [-s ignore_space] [-p ignore_punctuation]")
     raise SystemExit
 
@@ -30,7 +30,7 @@ def isAscii(string):
     return all(ord(c) < 128 for c in string)
 
 
-def findnonAscii(string):
+def findNonAscii(string):
     """Returns the index of the first non-ASCII
     character in <string> or -1 if string is
     ASCII"""
@@ -90,11 +90,18 @@ def parseArgs(arg_list):
         usage()
 
 
-def isPangram(string):
-    if not isAscii(string):
-        print("Could not compare; remove the invalid chars: ")
-        print(findnonAscii(string))
+def isPangram(string, fix_non_ascii=False, strict=False):
+    if strict:
+        if not string.isalpha():
+            raise ValueError("String is not alpha and strict mode is enabled")
+    if not isAscii(string) and not fix_non_ascii:
+        raise ValueError("Could not compare; remove the invalid chars: (use arg fix_non_ascii) ")
+        print("Non ascii at {}".format(findnonAscii(string)))
         return False
+    elif not isAscii(string) and fix_non_ascii:
+        print("fixing non ascii...")
+        string = fixNonAscii(string)
+    string = string.lower().strip()
     for i in extlib.LOWERCASE:
         if i not in string:
             return False
@@ -102,10 +109,18 @@ def isPangram(string):
 
 
 def isPalindrome(string, ignore_caps=False, ignore_punc=False,
-                 ignore_space=False):
-    if not isAscii(string):
-        print("Could not compare remove the invalid chars: ")
-        print(findnonAscii(string))
+                 ignore_space=False, fix_non_ascii=False, 
+                 strict=False):
+    if strict:
+        if not string.isalpha():
+            raise ValueError("String is not alpha and strict mode is enabled")
+    if not isAscii(string) and not fix_non_ascii:
+        raise ValueError("Could not compare; remove the invalid chars: (use arg fix_non_ascii) ")
+        print("Non ascii at {}".format(findnonAscii(string)))
+        return False
+    elif not isAscii(string) and fix_non_ascii:
+        print("Fixing non ascii...")
+        string = fixNonAscii(string)
     if ignore_caps:
         string = string.lower()
     if ignore_punc:
