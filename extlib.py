@@ -28,6 +28,11 @@ PUNCTUATION = tuple([m for m in string.punctuation])
 EXITWORDS = ('quit', 'exit', 'abort', 'done', 'end')
 
 
+def warn(msg, sep=' ', end='\n', file=sys.stdout):
+    '''platform: darwin'''
+    print(tcolors.warn + "WARNING: " + msg + tcolors.black, sep=sep, end=end, file=file)
+
+
 def reverse(array):
     return list(reversed(array))
 

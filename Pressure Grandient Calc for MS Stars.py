@@ -88,7 +88,7 @@ class Application(object):
             return "Error"
 
         total, pressures = heq(l, r, d, s)
-        if total == None and pressures == None:
+        if total is None and pressures is None:
             return -1
         try:
             if answer:
