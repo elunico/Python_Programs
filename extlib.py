@@ -4,7 +4,9 @@ import sys
 import string
 import re
 import random
-import tcolors
+import imp
+
+tcolors = imp.load_source("tcolors.py", "/Users/thomaspovinelli/Python_Programs/tcolors.py")
 
 
 if "2." in sys.version[0:2]:

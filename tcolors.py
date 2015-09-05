@@ -25,8 +25,8 @@ colors = {'magenta':magenta, 'purple':purple, 'blue':blue, 'green':green, '_pass
 def changeColor(color):
     c = color.lower().strip()
     try:
-        assert c in colors.keys()
-    except AssertionError:
+        print(colors[c])
+    except KeyError:
         print ("You must choose from {}".format(list(colors.keys())))
         return 1
     print (colors[c])
