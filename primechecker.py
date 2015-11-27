@@ -21,7 +21,7 @@ def is_prime(n):
             return None
     if n == 2:
         return True
-    if str(n)[-1] == '5' and n != 5:
+    if n % 5 == 0 and n != 5:
         return False
     if n % 2 == 0 and n > 2:
         return False
