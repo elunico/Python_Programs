@@ -176,24 +176,15 @@ def findandprint(needle, haystack, echo=True):
 
 
 def scan_for_bool(item):
-    try:
-        item = int(item)
-    except:
-        pass
-    try:
-        item = float(item)
-    except:
-        pass
     if isinstance(item, str):
         item = item.strip().lower()
-        if item in ("True", "true"):
+        if item == "true":
             return 1
-        if item in ("False", "false"):
+        if item == "false":
             return 0
-    if isinstance(item, int):
-        return item
-    if isinstance(item, (bool, float, long)):
-        return int(item)
+    else:
+        return bool(item)
+
 
 
 def demo():
