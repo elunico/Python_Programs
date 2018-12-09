@@ -24,6 +24,7 @@ import time
 import sys
 import tcolors # Not a builtin, requires tcolors.py file (written by me)
 from os import system
+import os 
         
 # Python 2 catch
 if '2.' in sys.version[0:2]:
@@ -398,8 +399,8 @@ def usage():
 # if-main
 if __name__ == '__main__':
     usage()
-    if sys.platform.lower() == "darwin":
-        system('clear')
-    elif sys.platform.lower() == "win32" or sys.platform.lower() == 'windows_nt' or os.name.lower() == 'nt':
+    if sys.platform.lower() == "win32" or sys.platform.lower() == 'windows_nt' or os.name.lower() == 'nt':
         system('cls')
+    else:
+        system('clear')
     main()
